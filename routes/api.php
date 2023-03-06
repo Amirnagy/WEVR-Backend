@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Auth\Logout;
 use App\Http\Controllers\API\Auth\Register;
 use App\Http\Controllers\API\Auth\reset;
 use App\Http\Controllers\Api\Products\Products;
+use App\Http\Controllers\API\User\UpdateUserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 // producted routes by api sunctum ...
 Route::group(['middleware'=>['auth:sanctum']],function () {
-    Route::resource('product', Products::class);
+    // Route::resource('product', Products::class);
     //Route::get('product/search/{name}', [Products::class,'search']);
+    Route::post('updateUser', [UpdateUserInfo::class,'updateUser']);
+    Route::post('checkPassword', [UpdateUserInfo::class,'checkpassword']);
+    Route::post('changePassword', [UpdateUserInfo::class,'changePassword']);
+    Route::post('changePhone', [UpdateUserInfo::class,'changePhone']);
     Route::delete('logout', [Logout::class,'logout']);
 });
 Route::resource('product', Products::class);

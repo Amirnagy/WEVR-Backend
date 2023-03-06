@@ -13,12 +13,12 @@ use Laravel\Socialite\Facades\Socialite;
 class Login extends Controller
 {
 
-    
+
     private function apiResponse($status,$massage,$data)
     {
         $response = [
             'status' => $status,
-            '$massage' =>$massage,
+            'massage' =>$massage,
             'data' => $data
         ];
         return response()->json(

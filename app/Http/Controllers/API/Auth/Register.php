@@ -13,7 +13,7 @@ class Register extends Controller
     {
         $response = [
             'status' => $status,
-            '$massage' =>$massage,
+            'massage' =>$massage,
             'data' => $data
         ];
         return response()->json(

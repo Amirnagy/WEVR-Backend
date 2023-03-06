@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'photo',
+        'adderss',
         'pin_code'
     ];
 
@@ -55,4 +56,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Social::class);
     }
+
+    public function nationals_id()
+    {
+        return $this->hasOne(national_id::class,'user_id','id');
+    }
+
 }
