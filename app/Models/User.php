@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function nationals_id()
     {
-        return $this->hasOne(national_id::class,'user_id','id');
+        return $this->hasOne(national_id::class);
     }
 
 }
