@@ -32,6 +32,22 @@ class UpdateUserInfo extends Controller
             $front_image_Natioanl = $request->file('front_National_ID');
             $back_image_Natioanl = $request->file('back_National_ID');
 
+            if($name)
+            {
+                $user->name = $name;
+                if($user->save())
+                {
+                    $data['name'] = 'name updated successfuly';
+                }
+            }
+            if($address)
+            {
+                $user->adderss = $address;
+                if($user->save())
+                {
+                    $data['address'] = 'address updated successfuly';
+                }
+            }
             // if National_ID found
             if($national_id){
 
@@ -42,7 +58,7 @@ class UpdateUserInfo extends Controller
                 ]);
                 if($validator->fails())
                 {
-                    $response = ['status' => 0, 'message' => 'validation errors', 'errors' => $validator->errors()];
+                    $response = ['status' => 0, 'data success' => $data, 'errors' => $validator->errors()];
                     return response()->json($response);
                 }
 
@@ -93,24 +109,6 @@ class UpdateUserInfo extends Controller
                 }
 
 
-            }
-
-
-            if($name)
-            {
-                $user->name = $name;
-                if($user->save())
-                {
-                    $data['name'] = 'name updated successfuly';
-                }
-            }
-            if($address)
-            {
-                $user->adderss = $address;
-                if($user->save())
-                {
-                    $data['address'] = 'address updated successfuly';
-                }
             }
 
             $response = ['status' => 1,'message' => $data];
