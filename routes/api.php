@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Apartments\ApartmaentController;
 use App\Http\Controllers\API\Auth\Login;
 use App\Http\Controllers\API\Auth\Logout;
 use App\Http\Controllers\API\Auth\Register;
@@ -24,19 +25,24 @@ use Illuminate\Support\Facades\Route;
 // producted routes by api sunctum ...
 Route::group(['middleware'=>['auth:sanctum']],function () {
 
-    // Route::resource('product', Products::class);
-    // Route::get('product/search/{name}', [Products::class,'search']);
+
     Route::post('updateUser', [UpdateUserInfo::class,'updateUser']);
     Route::post('checkPassword', [UpdateUserInfo::class,'checkpassword']);
     Route::post('changePassword', [UpdateUserInfo::class,'changePassword']);
     Route::post('changePhone', [UpdateUserInfo::class,'changePhone']);
+    // -------------------------------------------------------
+    Route::get('banners',[ApartmaentController::class,'getBanners']);
+
+
+
+    // -------------------------------------------------------
     Route::delete('logout', [Logout::class,'logout']);
 
 
 });
-// Route::resource('product', Products::class);
+
 // -----------------------------------------------------
-// Route::group(['middleware'=>''])
+
 Route::post('register',[Register::class,'register']);
 Route::post('login',[Login::class,'login']);
 Route::post('resetViaEmail',[reset::class,'sendingEmail']);
@@ -52,3 +58,9 @@ Route::post('newPassword',[reset::class,'newPassword']);
 Route::get('/',function (){
     return view('welldone');
 });
+
+// -------------------------------------------------------
+
+
+// Route::resource('product', Products::class);
+// Route::get('product/search/{name}', [Products::class,'search']);
