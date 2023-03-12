@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Dashbord\ApartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,18 @@ Route::get('/dashbord', function () {
     return view('dashbord.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::controller(ApartmentController::class)->group(function(){
+    Route::get('showApartments','showApartments')->name('showApartments');
+    Route::post('addApartments','postApartments')->name('addApartments');
+});
+
+
+// Route::get('addApartments',[ApartmentController::class,'showApartments'])
+//     ->name('addApartments');
+
+// Route::post('addApartments',[ApartmentController::class,'postApartments'])
+//     ->name('addApartments');
 
 require __DIR__.'/auth.php';
 // Route::middleware('auth')->group(function () {

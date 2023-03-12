@@ -1,17 +1,17 @@
 <!--Sidebar-->
-<div class="sidebar-widget author-widget">
+{{-- <div class="sidebar-widget author-widget"> --}}
     {{-- photo of user  --}}
-    <div class="media">
-        <a href="/profile" class="media-left">
+    {{-- <div class="media"> --}}
+        {{-- <a href="/profile" class="media-left"> --}}
             {{-- @if (isset(Auth::user()->employee->photo))
                 <img src="{{asset('photos/'.Auth::user()->employee->photo)}}" width="40px" height="30px" class="img-responsive">
             @else --}}
-            <img src="{{ asset('assets/img/avatars/WevrLogo.jpg') }}" class="img-responsive">
+            {{-- <img src="{{ asset('assets/img/avatars/WevrLogo.jpg') }}" class="img-responsive"> --}}
             {{-- @endif --}}
 
-        </a>
-    </div>
-</div>
+        {{-- </a> --}}
+    {{-- </div> --}}
+{{-- </div> --}}
 
 <!-- Sidebar Menu  -->
 <ul class="nav sidebar-menu scrollable">
@@ -31,7 +31,7 @@
         </a>
         <ul class="nav sub-nav">
             <li>
-                <a href="">
+                <a href="{{Route('addApartments')}}">
                     <span class="fa fa-adn"></span> Add Apartment </a>
             </li>
             <li>

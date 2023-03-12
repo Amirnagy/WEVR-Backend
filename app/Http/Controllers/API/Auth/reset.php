@@ -52,7 +52,7 @@ class reset extends Controller
             }
         }else
         {
-            $this->apiResponse(0,'email not register ',[]);
+            return $this->apiResponse(0,'email not register ',[]);
         }
     }
 

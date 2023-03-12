@@ -4,7 +4,7 @@
 <head>
     <!-- -------------- Meta and Title -------------- -->
     <meta charset="utf-8">
-    <title> WEVR  </title>
+    <title> WEVR </title>
     <meta name="description" content="WEVR">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf_token" content="{{ csrf_token() }}">
@@ -18,20 +18,21 @@
 
     <!-- -------------- CSS - theme -------------- -->
     <link rel="stylesheet" type="text/css" href="/assets/skin/default_skin/css/theme.css">
+    <link rel="stylesheet" type="text/css" href='/assets/fonts/icomoon/icomoon.css'>
 
 
     <!-- -------------- CSS - allcp forms -------------- -->
-    {{-- <link rel="stylesheet" type="text/css" href="/assets/allcp/forms/css/forms.css">
+    <link rel="stylesheet" type="text/css" href="/assets/allcp/forms/css/forms.css">
     <link rel="stylesheet" type="text/css" href="/assets/allcp/forms/css/widget.css">
 
     <link rel="stylesheet" type="text/css" href="assets/js/plugins/select2/css/core.css">
---}}
+
 
     <!--  Custom css -->
     <link rel="stylesheet" type="text/css" href="/assets/custom.css">
 
 
-    @stack('styles')
+
 
 
 
@@ -46,6 +47,44 @@
 
         .blink_third {
             color: yellow;
+        }
+
+        .apartment-form {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border:
+        }
+        .apartment-form .form-group .addbutton {
+            background-color: #007bff;
+            color: #fff;
+            border:
         }
     </style>
 
@@ -95,24 +134,24 @@
     {{-- <script src="/assets/js/jquery/jquery_ui/jquery-ui.min.js"></script> --}}
 
     <!-- -------------- HighCharts Plugin -------------- -->
-    {{-- <script src="/assets/js/plugins/highcharts/highcharts.js"></script>
-    <script src="/assets/js/plugins/c3charts/d3.min.js"></script>
-    <script src="/assets/js/plugins/c3charts/c3.min.js"></script> --}}
+    {{-- <script src="/assets/js/plugins/highcharts/highcharts.js"></script> --}}
+    {{-- <script src="/assets/js/plugins/c3charts/d3.min.js"></script> --}}
+    {{-- <script src="/assets/js/plugins/c3charts/c3.min.js"></script> --}}
 
     <!-- -------------- Simple Circles Plugin -------------- -->
     {{-- <script src="/assets/js/plugins/circles/circles.js"></script> --}}
 
     <!-- -------------- Maps JSs -------------- -->
-    {{-- <script src="/assets/js/plugins/jvectormap/jquery.jvectormap.min.js"></script> --}}
-    {{-- <script src="/assets/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js"></script> --}}
+    <script src="/assets/js/plugins/jvectormap/jquery.jvectormap.min.js"></script>
+    <script src="/assets/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js"></script>
 
     <!-- -------------- FullCalendar Plugin -------------- -->
-    {{-- <script src="/assets/js/plugins/fullcalendar/lib/moment.min.js"></script> --}}
-    {{-- <script src="/assets/js/plugins/fullcalendar/fullcalendar.min.js"></script> --}}
+    <script src="/assets/js/plugins/fullcalendar/lib/moment.min.js"></script>
+    <script src="/assets/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 
     <!-- -------------- Date/Month - Pickers -------------- -->
-    {{-- <script src="/assets/allcp/forms/js/jquery-ui-monthpicker.min.js"></script> --}}
-    {{-- <script src="/assets/allcp/forms/js/jquery-ui-datepicker.min.js"></script> --}}
+    <script src="/assets/allcp/forms/js/jquery-ui-monthpicker.min.js"></script>
+    <script src="/assets/allcp/forms/js/jquery-ui-datepicker.min.js"></script>
 
     <!-- -------------- Magnific Popup Plugin -------------- -->
     {{-- <script src="/assets/js/plugins/magnific/jquery.magnific-popup.js"></script> --}}
@@ -123,69 +162,10 @@
     <script src="/assets/js/main.js"></script>
 
     <!-- -------------- Widget JS -------------- -->
-    <script src="/assets/js/demo/widgets.js"></script>
-    <script src="/assets/js/demo/widgets_sidebar.js"></script>
+    {{-- <script src="/assets/js/demo/widgets.js"></script> --}}
+    {{-- <script src="/assets/js/demo/widgets_sidebar.js"></script> --}}
     <script src="/assets/js/pages/dashboard1.js"></script>
 
-    <!-- Sweet alert -->
-    <script src="/assets/js/sweetalert.min.js"></script>
-
-    {{-- <script>
-        $('#datetimepicker2').datetimepicker();
-
-
-        (function($) {
-            $.fn.blink = function(options) {
-                var defaults = {
-                    delay: 3000
-                };
-                var options = $.extend(defaults, options);
-
-                return this.each(function() {
-                    var obj = $(this);
-                    setInterval(function() {
-                        if ($(obj).css("visibility") == "visible") {
-                            $(obj).css('visibility', 'hidden');
-                        } else {
-                            $(obj).css('visibility', 'visible');
-                        }
-                    }, options.delay);
-                });
-            }
-        }(jQuery))
-
-        /////////////////////////////////////////////
-
-        $(document).ready(function() {
-            $('.blink').blink(); // default is 500ms blink interval.
-            $('.blink_second').blink({
-                delay: 100
-            }); // causes a 100ms blink interval.
-            $('.blink_third').blink({
-                delay: 1500
-            }); // causes a 1500ms blink interval.
-        });
-
-
-    </script> --}}
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108812473-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-108812473-2');
-    </script>
-
-
-    {{-- <script src="/assets/js/pages/allcp_forms-elements.js"></script> --}}
-
-    @stack('scripts')
 </body>
 
 </html>
