@@ -31,7 +31,7 @@
         </a>
         <ul class="nav sub-nav">
             <li>
-                <a href="{{Route('addApartments')}}">
+                <a href="{{Route('showApartments')}}">
                     <span class="fa fa-adn"></span> Add Apartment </a>
             </li>
             <li>
@@ -66,7 +66,7 @@
         </a>
         <ul class="nav sub-nav">
             <li>
-                <a href="/add-award">
+                <a href="{{Route('discount')}}">
                     <span class="fa fa-adn"></span> Add discount</a>
             </li>
             <li>

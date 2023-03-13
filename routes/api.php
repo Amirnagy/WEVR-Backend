@@ -31,7 +31,6 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('changePassword', [UpdateUserInfo::class,'changePassword']);
     Route::post('changePhone', [UpdateUserInfo::class,'changePhone']);
     // -------------------------------------------------------
-    Route::get('banners',[ApartmaentController::class,'getBanners']);
 
 
 
@@ -42,6 +41,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 });
 
 // -----------------------------------------------------
+
 
 Route::post('register',[Register::class,'register']);
 Route::post('login',[Login::class,'login']);

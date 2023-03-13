@@ -81,13 +81,54 @@
             color: #fff;
             border:
         }
+
         .apartment-form .form-group .addbutton {
             background-color: #007bff;
             color: #fff;
             border:
+
+        }
+
+        .text-pop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.757);
+            z-index: 100;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.4s;
+        }
+
+        .open-pop {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .text-pop .pop-content {
+            position: absolute;
+            width: 90%;
+            margin: 100px 0px;
+            background: white;
+            padding: 30px 30px 0px 30px;
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            margin-top: 140px;
+            transition: 0.4s;
+        }
+
+        .open-pop .pop-content {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 100px;
         }
     </style>
-
+    @livewireStyles
 </head>
 
 <body class="dashboard-page">
@@ -165,6 +206,22 @@
     {{-- <script src="/assets/js/demo/widgets.js"></script> --}}
     {{-- <script src="/assets/js/demo/widgets_sidebar.js"></script> --}}
     <script src="/assets/js/pages/dashboard1.js"></script>
+    <script>
+        const openOrderPop = () => {
+        let body = document.querySelector('.body')
+        let pop = document.querySelector('.text-pop');
+        pop.classList.add('open-pop')
+        body.style.overflowY = "hidden"
+    }
+
+    const closePop = () => {
+        let body = document.querySelector('.body')
+        let pop = document.querySelector('.text-pop');
+        pop.classList.remove('open-pop')
+        body.style.overflowY = "auto"
+    }
+    </script>
+    @livewireScripts
 
 </body>
 

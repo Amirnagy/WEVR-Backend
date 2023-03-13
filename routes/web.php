@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Dashbord\ApartmentController;
+use App\Http\Controllers\Dashbord\ApartmentDiscount;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +29,12 @@ Route::controller(ApartmentController::class)->group(function(){
     Route::post('addApartments','postApartments')->name('addApartments');
 });
 
+Route::controller(ApartmentDiscount::class)->group(function(){
+    Route::get('discount','makeDiscount')->name('discount');
+});
 
-// Route::get('addApartments',[ApartmentController::class,'showApartments'])
-//     ->name('addApartments');
 
-// Route::post('addApartments',[ApartmentController::class,'postApartments'])
-//     ->name('addApartments');
+
 
 require __DIR__.'/auth.php';
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+
