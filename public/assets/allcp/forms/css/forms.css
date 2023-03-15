@@ -1140,7 +1140,7 @@
 .allcp-form .btn-primary:hover,
 .allcp-form .btn-primary:focus,
 .allcp-form .btn-primary:active {
-  color: #fff;
+  color: #000000;
   text-shadow: 0 1px rgba(0, 0, 0, 0.08);
 }
 .allcp-form .button-left,

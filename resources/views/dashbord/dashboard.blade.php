@@ -37,11 +37,11 @@
                         <div class="panel-body">
                             <div class="row pv10">
                                 <div class="col-xs-5 ph10">
-                                    <img src="/assets/img/pages/upload-420x360.png" class="img-responsive mauto" alt="" />
+                                    <img src="/assets/img/pages/upload.jpg" style="height:70px; border-radius:50%; width: 70px;"  class="img-responsive mauto" alt="" />
                                 </div>
                                 <div class="col-xs-7 pl5">
-                                    <h3 class="text-muted"><a href=""> Upload Product</a>
-                                    </h3>
+                                    <h4 class="text-muted"><a href=""> Upload Product</a>
+                                    </h4>
                                 </div>
                             </div>
                         </div>
@@ -51,10 +51,10 @@
                     <div class="panel panel-tile">
                         <div class="panel-body">
                             <div class="row pv10">
-                                <div class="col-xs-5 ph10"><img src="/assets/img/pages/clipart6.png"
+                                <div class="col-xs-5 ph10"><img src="/assets/img/pages/auction.jpg" style="height:70px; border-radius:50%; width:70px"
                                         class="img-responsive mauto" alt="" /></div>
                                 <div class="col-xs-7 pl5">
-                                    <h3 class="text-muted"><a href=""> Auction </a></h3>
+                                    <h4 class="text-muted"><a href=""> Auction </a></h4>
                                 </div>
                             </div>
                         </div>
@@ -69,10 +69,10 @@
                     <div class="panel panel-tile">
                         <div class="panel-body">
                             <div class="row pv10">
-                                <div class="col-xs-5 ph10"><img src="{{asset('assets/img/pages/policies.png')}}"
+                                <div class="col-xs-5 ph10" ><img src="{{asset('assets/img/pages/policies2.jpg')}}" style="height:70px; border-radius:50%; width:70px"
                                         class="img-responsive mauto" alt="" /></div>
                                 <div class="col-xs-7 pl5">
-                                    <h3 class="text-muted"><a href=""> WEVR POLICIES </a></h3>
+                                    <h4 class="text-muted"><a href=""> Policies </a></h4>
                                 </div>
                             </div>
                         </div>

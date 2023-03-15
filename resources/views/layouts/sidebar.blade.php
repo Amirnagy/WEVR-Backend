@@ -61,7 +61,7 @@
     <li>
         <a class="accordion-toggle" href="#">
             <span class="fa fa fa-trophy"></span>
-            <span class="sidebar-title">discount</span>
+            <span class="sidebar-title">Discount</span>
             <span class="caret"></span>
         </a>
         <ul class="nav sub-nav">

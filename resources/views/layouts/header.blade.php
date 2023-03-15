@@ -25,7 +25,7 @@
                 {{-- @if (isset(\Auth::user()->employee->photo))
                     <img src="{{asset('photos/'.\Auth::user()->employee->photo)}}" width="50px" height="50px" alt="avatar" class="mw55">
                 @else --}}
-                <img src="{{asset('assets/img/avatars/WevrLogo.jpg')}}" alt="avatar" class="mw55">
+                <img src="{{asset('assets/img/avatars/logo.png')}}" alt="avatar" class="mw55">
                 {{-- @endif --}}
             </a>
             </a>
