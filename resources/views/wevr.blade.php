@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link rel="stylesheet" href="{{asset('assets/landingpage/css/wevr.css')}}">
-    <link rel="shortcut icon" href="{{asset('assets/landingpage/pics/sec-logo.png')}}" type="image/x-icon">
+    <link rel="stylesheet" href={{asset("assets/landingpage/css/wevr.css")}}>
+    <link rel="shortcut icon" href={{asset("assets/landingpage/pics/sec-logo.png")}} type="image/x-icon">
     <title>Wevr</title>
 </head>
 
