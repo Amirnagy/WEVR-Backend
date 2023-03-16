@@ -13,8 +13,7 @@
             <!-- -------------- Login Form -------------- -->
             <div class="allcp-form theme-primary mw320" id="login">
 
-                <span style="color:#FFFFFF"><strong><u>H</u>uman <u>R</u>esource <u>M</u>anagement
-                        <u>S</u>ystem</strong></span>
+                <span style="color:#FFFFFF"><strong><u>W</u>E <u>V</u>R</strong></span>
 
 
 

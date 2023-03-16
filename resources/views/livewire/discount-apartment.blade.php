@@ -31,90 +31,133 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box box-success">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <span class="panel-title hidden-xs">Apartment Lists</span><br />
-                            </div><br />
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <span class="panel-title hidden-xs">Apartment Lists</span><br />
+                                </div><br />
 
-                            <div class="panel-menu allcp-form theme-primary mtn">
-                            <div class="row">
+                                <div class="panel-menu allcp-form theme-primary mtn">
+                                    <div class="row">
 
-                                <div class="col-md-3">
-                                    <input type="text" class="field form-control" placeholder="query string" style="height:40px" value="" name="string">
+                                        <div class="col-md-3">
+                                            <input type="text" class="field form-control" placeholder="query string"
+                                                style="height:40px" value="" name="string">
+                                        </div>
+
+                                        <div class="text-right">
+                                            <input type="submit" value="Search" name="button" class="btn btn-primary">
+                                        </div>
+
+
+                                    </div>
                                 </div>
 
-                                <div class="text-right">
-                                    <input type="submit" value="Search" name="button" class="btn btn-primary">
-                                </div>
+                                <div class="panel-body pn">
 
+                                    <div class="table-responsive">
+                                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                            <thead>
+                                                <tr class="bg-light">
+                                                    <th class="text-center">Id</th>
+                                                    <th class="text-center">Aprtment</th>
+                                                    <th class="text-center">location</th>
+                                                    <th class="text-center">dimensions</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Images</th>
+                                                    <th class="text-center">Add Discount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                            </div>
-                                </div>
+                                                @foreach ($apartments as $apartment)
+                                                    <tr style="text-align: center">
+                                                        <td colspan="1">
 
-                            <div class="panel-body pn">
+                                                        </td>
+                                                        <td>
+                                                            <img src="{{ $apartment->vrlink }}" alt="">
+                                                        </td>
+                                                        <td>
+                                                            {{ $apartment->location }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $apartment->dimensions }} m
+                                                        </td>
+                                                        <td>
+                                                            {{ $apartment->status }}
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-toggle="modal" data-target="#myModal"
+                                                                data-images="{{ json_encode($imageUrls) }}"
+                                                                wire:click="showImages({{ $apartment->id }})">View
+                                                                Images
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" name="discount" id="">
+                                                            <input type="submit" value="save">
+                                                        </td>
 
-                                <div class="table-responsive">
-                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
-                                        <thead>
-                                        <tr class="bg-light">
-                                            <th class="text-center">Id</th>
-                                            <th class="text-center">Aprtment</th>
-                                            <th class="text-center">Address</th>
-                                            <th class="text-center">location</th>
-                                            <th class="text-center">dimensions</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Images</th>
-                                            <th class="text-center">Add Discount</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-
-                                        <tr style="text-align: center">
-                                            <td colspan="1">
-                                                1
-                                            </td>
-                                            <td >
-                                                2
-                                            </td>
-                                            <td >
-                                                3
-                                            </td>
-                                            <td >
-                                                4
-                                            </td>
-                                            <td >
-                                                5
-                                            </td>
-                                            <td >
-                                                6
-                                            </td>
-                                            <td >
-                                                <button class="btn btn-primary" onclick="openOrderPop()"> show</button>
-                                            </td>
-                                            <td >
-                                                8
-                                            </td>
-
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        {{ $apartments->links() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
         </section>
 
     </div>
-    <div class="text-pop">
-        <div className="pop-content">
-            <div className="close-icon" onClick={closePop}>
-                <i className="bi bi-x-lg"></i>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators"></ol>
+                        <div class="carousel-inner"></div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <img src="{{asset('assets/img/pages/products/Rectangle 176.png')}}" alt="" />
         </div>
     </div>
+
+
+    <script>
+        $('#myModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var imageUrls = JSON.parse(button.data('images')) // Extract image URLs from data attribute
+            var carouselInner = $(this).find('.carousel-inner') // Carousel inner HTML element
+            var carouselIndicators = $(this).find('.carousel-indicators') // Carousel indicators HTML element
+
+            // Update the carousel inner HTML
+            var carouselInnerHtml = ''
+            var carouselIndicatorsHtml = ''
+            for (var i = 0; i < imageUrls.length; i++) {
+                var activeClass = (i === 0) ? ' active' : ''
+                carouselInnerHtml += '<div class="carousel-item' + activeClass + '"><img src="' + imageUrls[i] +
+                    '" class="d-block w-100"></div>'
+                carouselIndicatorsHtml += '<li data-target="#carouselExampleIndicators" data-slide-to="' + i +
+                    '" class="' + activeClass + '"></li>'
+            }
+            carouselInner.html(carouselInnerHtml)
+            carouselIndicators.html(carouselIndicatorsHtml)
+        })
+    </script>
+
 </div>

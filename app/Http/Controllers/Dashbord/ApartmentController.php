@@ -55,7 +55,7 @@ class ApartmentController extends Controller
             // $Apartment->atributte = $request->attributes
             // $Apartment->featuers = $request->input('features', []);
             // saveing
-
+            
             $ApartmentDetiles = new Apartmentdetails();
             $ApartmentDetiles->apartment_id = $Apartment->id;
             $ApartmentDetiles->monthprice = $request->price;

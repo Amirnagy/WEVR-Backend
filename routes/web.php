@@ -33,6 +33,9 @@ Route::controller(ApartmentDiscount::class)->group(function(){
     Route::get('discount','makeDiscount')->name('discount');
 });
 
+Route::get('/',function (){
+    return view('wevr');
+});
 
 
 
