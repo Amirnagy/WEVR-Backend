@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('banners', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('apartment_id')->references('id')->on('apartments')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->long('image');
-            $table->timestamps();
+        Schema::table('banners', function (Blueprint $table) {
+            $table->integer('price_after_discount')->nullable();
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banners');
+        //
     }
 };

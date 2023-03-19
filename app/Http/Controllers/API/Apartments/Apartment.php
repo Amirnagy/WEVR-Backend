@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Apartments;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apartment as ModelsApartment;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 
@@ -29,18 +30,15 @@ class Apartment extends Controller
         {
             $id = $banner->apartment_id;
             $images = $banner->image;
+            $discount = $banner->discount;
+            $priceAfterDiscount = $banner->price_after_discount;
 
             $image = env('APP_URL').'/'. $images[0];
-
-            // will resault array of links for images
-            // $imageCollection =[];
-            // foreach($images as $key => $image)
-            // {
-                // $imageCollection[$key]=env('APP_URL').'/'.$image;
-            // }
             $bannerData = [
                 'id' => $id,
                 'image' => $image,
+                'discount' => $discount,
+                'price_after_discount' => $priceAfterDiscount
             ];
 
             array_push($data, $bannerData);
@@ -48,6 +46,18 @@ class Apartment extends Controller
         return $this->apiResponse(1,'null',$data);
     }
 
+    public function Apartment()
+    {
+        // get all data of Apartment of all user 10 and with every request i
+        // will get the next 10
+
+        $Apartment = ModelsApartment::with('info')->with('gallary')->paginate(1);
+        return $this->apiResponse(1,'arpartment loaded susseccfully',$Apartment);
+
+
+
+    }
 
 
 }
+

@@ -55,7 +55,7 @@ class ApartmentController extends Controller
             // $Apartment->atributte = $request->attributes
             // $Apartment->featuers = $request->input('features', []);
             // saveing
-            
+
             $ApartmentDetiles = new Apartmentdetails();
             $ApartmentDetiles->apartment_id = $Apartment->id;
             $ApartmentDetiles->monthprice = $request->price;
@@ -74,7 +74,7 @@ class ApartmentController extends Controller
             foreach ($images as $file) {
                 $ImageName = rand(100000, 999999) . time() . $file->getClientOriginalName();
                 $path = $file->storeAs('gallaryaprtments', $ImageName, 'WEVR');
-                $this->gallary[] = $path;
+                $this->gallary[] = env('APP_URL').'/'.'public'.'/'.$path;
             }
 
             $ApartmentGallary = new Gallary();

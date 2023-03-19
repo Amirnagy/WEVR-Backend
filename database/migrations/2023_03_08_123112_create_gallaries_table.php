@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('gallaries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id')->references('id')->on('apartments')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('image');
+            $table->longText('image');
             $table->timestamps();
         });
     }

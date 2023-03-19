@@ -14,6 +14,12 @@ class Gallary extends Model
         "image",
     ];
 
+    protected $hidden = [
+        'id',
+        'apartment_id',
+        'created_at',
+        'updated_at',
+    ];
     protected $casts = [
         'image' => 'array',
     ];

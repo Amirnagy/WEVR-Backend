@@ -33,7 +33,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('changePhone', [UpdateUserInfo::class,'changePhone']);
     // -------------------------------------------------------
     Route::get('banners',[Apartment::class,'Banner']);
-
+    Route::get('apartment',[Apartment::class,'Apartment']);
 
     // -------------------------------------------------------
     Route::delete('logout', [Logout::class,'logout']);

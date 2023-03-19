@@ -23,6 +23,14 @@ class Apartmentdetails extends Model
     ];
 
 
+    protected $hidden = [
+        'id',
+        'apartment_id',
+        'created_at',
+        'updated_at',
+        'price_after_discount'
+    ];
+
     public function apartment()
     {
         return $this->belongsTo(Apartment::class);

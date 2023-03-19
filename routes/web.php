@@ -19,18 +19,24 @@ use App\Http\Controllers\Dashbord\ApartmentDiscount;
 
 
 
+
+
+Route::group(['middleware'=>['auth:sanctum']],function () {
+
 Route::get('/dashbord', function () {
     return view('dashbord.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+});
 
 Route::controller(ApartmentController::class)->group(function(){
+
     Route::get('showApartments','showApartments')->name('showApartments');
     Route::post('addApartments','postApartments')->name('addApartments');
 });
 
 Route::controller(ApartmentDiscount::class)->group(function(){
+
     Route::get('discount','makeDiscount')->name('discount');
+    
 });
 
 Route::get('/',function (){
@@ -38,6 +44,7 @@ Route::get('/',function (){
 });
 
 
+});
 
 require __DIR__.'/auth.php';
 

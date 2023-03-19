@@ -55,7 +55,7 @@ class DiscountApartment extends Component
         {
             if( $Apartment->id == $ApartmentId ){
 
-                $apartment = Gallary::find($ApartmentId);
+                $apartment = Gallary::where('apartment_id',$ApartmentId)->first();
                 if($apartment)
                 {
                     $apartmentImages = $apartment->image;
@@ -84,15 +84,17 @@ class DiscountApartment extends Component
                 // ====== return instance of user Apartment with relation Banner of Apartment =====
                 // $ApartmentsUser = $this->user->Apartment()->where('id', $apartmentID)->get();
                 $ApartmentUser = $this->user->Apartment()->with('Banner')->where('id', $apartmentID)->first();
-                $photos = Gallary::find($apartmentID)->image;
+                $photos = Gallary::where('apartment_id',$apartmentID)->first();
+                $photos = $photos->image;
                 $Banner = $ApartmentUser->Banner;
                 if($Banner){
+                    $priceyear = Apartmentdetails::where('apartment_id',$apartmentID)->first();
+
                     $Banner->image = $photos;
                     $Banner->discount = $discount;
+                    $Banner->price_after_discount = ($priceyear->yearprice * $discount/100) - ($discount/100);
                     $Banner->save();
-                    $priceyear = Apartmentdetails::where('apartment_id',$apartmentID)->first();
-                    
-                    $priceyear->yearprice = ($priceyear->yearprice * $discount/100) - ($discount/100);
+                    $priceyear->price_after_discount = ($priceyear->yearprice * $discount/100) - ($discount/100);
                     if($priceyear->save()){
                         Session::flash('success', 'Discount created successfully!');
                     }
@@ -100,14 +102,15 @@ class DiscountApartment extends Component
 
                     break;
                 }else{
+                    $priceyear = Apartmentdetails::where('apartment_id',$apartmentID)->first();
                     $Banner = new Banner();
                     $Banner->apartment_id = $apartmentID ;
                     $Banner->image = $photos;
                     $Banner->discount = $discount;
+                    $Banner->price_after_discount = ($priceyear->yearprice * $discount/100) - ($discount/100);
                     $Banner->save();
-                    $priceyear = Apartmentdetails::find($apartmentID)->get();
 
-                    $priceyear->yearprice = ($priceyear->yearprice * $discount/100) - ($discount/100);
+                    $priceyear->price_after_discount = ($priceyear->yearprice * $discount/100) - ($discount/100);
                     $priceyear->save();
                     if($priceyear->save()){
                         Session::flash('success', 'Discount created successfully!');
