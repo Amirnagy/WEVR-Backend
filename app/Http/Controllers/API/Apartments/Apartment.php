@@ -21,5 +21,33 @@ class Apartment extends Controller
     }
 
 
+    public function Banner()
+    {
+        $banners = Banner::all();
+        $data = [];
+        foreach($banners as $record => $banner)
+        {
+            $id = $banner->apartment_id;
+            $images = $banner->image;
+
+            $image = env('APP_URL').'/'. $images[0];
+
+            // will resault array of links for images
+            // $imageCollection =[];
+            // foreach($images as $key => $image)
+            // {
+                // $imageCollection[$key]=env('APP_URL').'/'.$image;
+            // }
+            $bannerData = [
+                'id' => $id,
+                'image' => $image,
+            ];
+
+            array_push($data, $bannerData);
+        }
+        return $this->apiResponse(1,'null',$data);
+    }
+
+
 
 }

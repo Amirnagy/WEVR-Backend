@@ -1,6 +1,19 @@
 <div>
     <div class="content">
 
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="image-grid">
+                    @if (isset($apartmentImages) && count($apartmentImages) > 0)
+                        @foreach ($apartmentImages as $apartment)
+                            <img src="{{ $apartment }}" alt="">
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+
+
         <header id="topbar" class="alt">
             <div class="topbar-left">
                 <ol class="breadcrumb">
@@ -19,6 +32,7 @@
                 </ol>
             </div>
         </header>
+
 
 
         <!-- -------------- Content -------------- -->
@@ -51,7 +65,16 @@
 
                                     </div>
                                 </div>
-
+                                @if(Session::has('success'))
+                                <div class="alert alert-success">
+                                    {{ Session::get('success') }}
+                                </div>
+                                @endif
+                                <script>
+                                            setTimeout(function() {
+                                                $('.alert-success').remove();
+                                            }, 3000);
+                                </script>
                                 <div class="panel-body pn">
 
                                     <div class="table-responsive">
@@ -71,8 +94,9 @@
 
                                                 @foreach ($apartments as $apartment)
                                                     <tr style="text-align: center">
-                                                        <td colspan="1">
 
+                                                        <td colspan="1">
+                                                            {{ $loop->index + 1 }}
                                                         </td>
                                                         <td>
                                                             <img src="{{ $apartment->vrlink }}" alt="">
@@ -87,16 +111,20 @@
                                                             {{ $apartment->status }}
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-primary"
-                                                                data-toggle="modal" data-target="#myModal"
-                                                                data-images="{{ json_encode($imageUrls) }}"
-                                                                wire:click="showImages({{ $apartment->id }})">View
-                                                                Images
-                                                            </button>
+
+                                                            <button class="modalBtn"
+                                                                wire:click="showImage({{ $apartment->id }})"> view
+                                                                image</button>
                                                         </td>
                                                         <td>
-                                                            <input type="number" name="discount" id="">
-                                                            <input type="submit" value="save">
+
+                                                            <input type="number"
+                                                                wire:model="discounts.{{ $apartment->id }}"
+                                                                style="width: 35%;padding: 2px;border-radius: 5px
+                                                                border: 1px solid #ccc;">
+                                                            <button
+                                                                wire:click="addDiscount({{ $apartment->id }})">
+                                                            add</button>
                                                         </td>
 
                                                     </tr>
@@ -112,52 +140,33 @@
                 </div>
             </div>
         </section>
-
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators"></ol>
-                        <div class="carousel-inner"></div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                            data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                            data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <script>
-        $('#myModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var imageUrls = JSON.parse(button.data('images')) // Extract image URLs from data attribute
-            var carouselInner = $(this).find('.carousel-inner') // Carousel inner HTML element
-            var carouselIndicators = $(this).find('.carousel-indicators') // Carousel indicators HTML element
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-            // Update the carousel inner HTML
-            var carouselInnerHtml = ''
-            var carouselIndicatorsHtml = ''
-            for (var i = 0; i < imageUrls.length; i++) {
-                var activeClass = (i === 0) ? ' active' : ''
-                carouselInnerHtml += '<div class="carousel-item' + activeClass + '"><img src="' + imageUrls[i] +
-                    '" class="d-block w-100"></div>'
-                carouselIndicatorsHtml += '<li data-target="#carouselExampleIndicators" data-slide-to="' + i +
-                    '" class="' + activeClass + '"></li>'
+        // Get all the buttons with the class "modalBtn"
+        var buttons = document.getElementsByClassName("modalBtn");
+
+        // Loop through all the buttons and attach click event listeners
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = function() {
+                // Wait for 3 seconds before displaying the modal
+                setTimeout(function() {
+                    modal.style.display = "block";
+                    document.body.style.overFlowY = 'hidden';
+                }, 2000);
             }
-            carouselInner.html(carouselInnerHtml)
-            carouselIndicators.html(carouselIndicatorsHtml)
-        })
-    </script>
+        }
 
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.style.overFlowY = 'auto';
+
+
+            }
+        }
+    </script>
 </div>

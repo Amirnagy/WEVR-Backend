@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Apartments\ApartmaentController;
-use App\Http\Controllers\API\Auth\Login;
-use App\Http\Controllers\API\Auth\Logout;
-use App\Http\Controllers\API\Auth\Register;
-use App\Http\Controllers\API\Auth\reset;
-use App\Http\Controllers\Api\Products\Products;
-use App\Http\Controllers\API\User\UpdateUserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\Auth\Login;
+use App\Http\Controllers\API\Auth\reset;
+use App\Http\Controllers\API\Auth\Logout;
+use App\Http\Controllers\API\Auth\Register;
+use App\Http\Controllers\Api\Products\Products;
+use App\Http\Controllers\API\User\UpdateUserInfo;
+use App\Http\Controllers\API\Apartments\Apartment;
+use App\Http\Controllers\Apartments\ApartmaentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('changePassword', [UpdateUserInfo::class,'changePassword']);
     Route::post('changePhone', [UpdateUserInfo::class,'changePhone']);
     // -------------------------------------------------------
-
+    Route::get('banners',[Apartment::class,'Banner']);
 
 
     // -------------------------------------------------------

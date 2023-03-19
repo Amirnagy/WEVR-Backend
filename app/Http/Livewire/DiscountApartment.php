@@ -3,10 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Livewire\Request;
+use App\Models\Banner;
+use App\Models\Gallary;
 use Livewire\Component;
 use App\Models\Apartment;
 use Livewire\WithPagination;
+use App\Models\Apartmentdetails;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class DiscountApartment extends Component
 {
@@ -15,10 +20,10 @@ class DiscountApartment extends Component
     // public $location;
     // public $dimensions;
     // public $status;
-    // public $discount;
+    public $discounts=[];
     public $user;
     // public $apartments;
-    public $imageUrls;
+    public $apartmentImages=[];
     public $info;
 
 
@@ -42,19 +47,77 @@ class DiscountApartment extends Component
         // }
     }
 
-    public function showImages($ApaertmentId)
+    public function showImage($ApartmentId)
     {
+        $ApartmentsUser = $this->user->Apartment;
         // Fetch the item from the database using the $itemId parameter
-        if($this->user->Apartment->$ApaertmentId){
+        foreach ($ApartmentsUser as $Apartment )
+        {
+            if( $Apartment->id == $ApartmentId ){
 
-            $apartment = Apartment::find($ApaertmentId);
-            // $gallary = $apartment->gallary->image;
-            dd($apartment);
+                $apartment = Gallary::find($ApartmentId);
+                if($apartment)
+                {
+                    $apartmentImages = $apartment->image;
+                    $apartmentImages = array_map('stripslashes', $apartmentImages);
+                    $this->apartmentImages = $apartmentImages;
+                    break;
+                }
+                else{
+                    return $this->apartmentImages=[];
+                    break;
+                }
+            }
+        }
+        // dd($this->apartmentImages);
+
+    }
+
+
+    public function addDiscount($apartmentID)
+    {
+        foreach($this->discounts as $key => $discount)
+        {
+            if($key == $apartmentID)
+            {
+                // $discount will be the value of this input feild
+                // ====== return instance of user Apartment with relation Banner of Apartment =====
+                // $ApartmentsUser = $this->user->Apartment()->where('id', $apartmentID)->get();
+                $ApartmentUser = $this->user->Apartment()->with('Banner')->where('id', $apartmentID)->first();
+                $photos = Gallary::find($apartmentID)->image;
+                $Banner = $ApartmentUser->Banner;
+                if($Banner){
+                    $Banner->image = $photos;
+                    $Banner->discount = $discount;
+                    $Banner->save();
+                    $priceyear = Apartmentdetails::where('apartment_id',$apartmentID)->first();
+                    
+                    $priceyear->yearprice = ($priceyear->yearprice * $discount/100) - ($discount/100);
+                    if($priceyear->save()){
+                        Session::flash('success', 'Discount created successfully!');
+                    }
+
+
+                    break;
+                }else{
+                    $Banner = new Banner();
+                    $Banner->apartment_id = $apartmentID ;
+                    $Banner->image = $photos;
+                    $Banner->discount = $discount;
+                    $Banner->save();
+                    $priceyear = Apartmentdetails::find($apartmentID)->get();
+
+                    $priceyear->yearprice = ($priceyear->yearprice * $discount/100) - ($discount/100);
+                    $priceyear->save();
+                    if($priceyear->save()){
+                        Session::flash('success', 'Discount created successfully!');
+                    }
+                    break;
+                }
+
+            }
         }
 
-
-        // Show the modal
-        $this->emit('showModal');
     }
 
 
@@ -75,7 +138,7 @@ class DiscountApartment extends Component
     public function render()
     {
         return view('livewire.discount-apartment',[
-            'apartments' => $this->user->Apartment()->paginate(5)
+            'apartments' => $this->user->Apartment()->paginate(10)
         ]);
     }
 }

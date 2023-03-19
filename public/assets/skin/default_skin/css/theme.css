@@ -21418,7 +21418,7 @@ body.sidebar-collapsed #sidebar:before {
 }
 
 .navbar {
-    z-index: 1030;
+    z-index: 1000;
     margin-bottom: 0;
     height: 66px;
     color: #2a2f43;
@@ -24449,7 +24449,7 @@ body.sb-l-m .sidebar-menu>li.active>a>span:nth-child(1) {
 
 #sidebar_left.sidebar-light .sidebar-left-content {
     background-color: #f5f5f5;
-    
+
 }
 
 #sidebar_left.sidebar-light.nano.affix>.nano-pane>.nano-slider {

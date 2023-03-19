@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Banner;
 use App\Models\Gallary;
 use App\Models\Apartmentdetails;
 use Illuminate\Database\Eloquent\Model;
@@ -40,7 +41,10 @@ class Apartment extends Model
         return $this->hasOne(Gallary::class);
     }
 
-
+    public function Banner()
+    {
+        return $this->hasOne(Banner::class);
+    }
 
 
 }

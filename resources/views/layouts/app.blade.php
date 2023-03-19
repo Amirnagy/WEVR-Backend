@@ -30,14 +30,63 @@
 
     <!--  Custom css -->
     <link rel="stylesheet" type="text/css" href="/assets/custom.css">
-    <!-- custom bootstrap -->
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> --}}
+
 
 
 
 
 
     <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1001;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+
+        }
+
+        /* Modal Content/Box */
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 100px auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+        }
+
+
+        /* Image grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+        }
+
+        /* Images */
+        .image-grid img {
+            width: 100%;
+            height: auto;
+        }
+
         .blink {
             color: mediumblue;
         }
@@ -128,12 +177,6 @@
             visibility: visible;
             margin-top: 100px;
         }
-        input[type="text"], input[type="number"], textarea{
-            width: 82%;
-            padding: 3px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
     </style>
     @livewireStyles
 </head>
@@ -174,53 +217,19 @@
 
     </div>
 
-    <!-- -------------- Scripts -------------- -->
+    <!-- -------- Scripts ------- -->
 
-    <!-- -------------- jQuery -------------- -->
+    <!-- ----- jQuery --------- -->
     <script src="/assets/js/jquery/jquery-1.11.3.min.js"></script>
-    {{-- <script src="/assets/js/jquery/jquery-2.2.4.min.js"></script> --}}
-    {{-- <script src="/assets/js/jquery/jquery_ui/jquery-ui.min.js"></script> --}}
 
-    <!-- -------------- HighCharts Plugin -------------- -->
-    {{-- <script src="/assets/js/plugins/highcharts/highcharts.js"></script> --}}
-    {{-- <script src="/assets/js/plugins/c3charts/d3.min.js"></script> --}}
-    {{-- <script src="/assets/js/plugins/c3charts/c3.min.js"></script> --}}
-
-    <!-- -------------- Simple Circles Plugin -------------- -->
-    {{-- <script src="/assets/js/plugins/circles/circles.js"></script> --}}
-
-    <!-- -------------- Maps JSs -------------- -->
-    <script src="/assets/js/plugins/jvectormap/jquery.jvectormap.min.js"></script>
-    <script src="/assets/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js"></script>
-
-    <!-- -------------- FullCalendar Plugin -------------- -->
-    <script src="/assets/js/plugins/fullcalendar/lib/moment.min.js"></script>
-    <script src="/assets/js/plugins/fullcalendar/fullcalendar.min.js"></script>
-
-    <!-- -------------- Date/Month - Pickers -------------- -->
-    <script src="/assets/allcp/forms/js/jquery-ui-monthpicker.min.js"></script>
-    <script src="/assets/allcp/forms/js/jquery-ui-datepicker.min.js"></script>
-
-    <!-- -------------- Magnific Popup Plugin -------------- -->
-    {{-- <script src="/assets/js/plugins/magnific/jquery.magnific-popup.js"></script> --}}
-
-    <!-- -------------- Theme Scripts -------------- -->
+    <!-- ------- Theme Scripts ------- -->
     <script src="/assets/js/utility/utility.js"></script>
     <script src="/assets/js/demo/demo.js"></script>
     <script src="/assets/js/main.js"></script>
 
-    <!-- -------------- Widget JS -------------- -->
-    {{-- <script src="/assets/js/demo/widgets.js"></script> --}}
-    {{-- <script src="/assets/js/demo/widgets_sidebar.js"></script> --}}
+    <!-- --------- Widget JS ------- -->
+
     <script src="/assets/js/pages/dashboard1.js"></script>
-
-    {{-- for bootstarp view image --}}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
-
 
     @livewireScripts
 
