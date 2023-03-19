@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id')->references('id')->on('apartments')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->long('image');
+            $table->longText('image');
             $table->timestamps();
         });
     }
