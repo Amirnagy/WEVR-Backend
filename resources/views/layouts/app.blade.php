@@ -4,234 +4,93 @@
 <head>
     <!-- -------------- Meta and Title -------------- -->
     <meta charset="utf-8">
-    <title> WEVR </title>
+    <title>WEVR</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="WEVR">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf_token" content="{{ csrf_token() }}">
+    {{-- bootstrap link  --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- -------------- Fonts -------------- -->
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic' rel='stylesheet'
-        type='text/css'>
+    {{-- font awesone cloudflare --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/styles.css') }}" />
 
-
-    <!-- -------------- CSS - theme -------------- -->
-    <link rel="stylesheet" type="text/css" href="/assets/skin/default_skin/css/theme.css">
-    <link rel="stylesheet" type="text/css" href='/assets/fonts/icomoon/icomoon.css'>
-
-
-    <!-- -------------- CSS - allcp forms -------------- -->
-    <link rel="stylesheet" type="text/css" href="/assets/allcp/forms/css/forms.css">
-    <link rel="stylesheet" type="text/css" href="/assets/allcp/forms/css/widget.css">
-
-    <link rel="stylesheet" type="text/css" href="assets/js/plugins/select2/css/core.css">
-
-
-    <!--  Custom css -->
-    <link rel="stylesheet" type="text/css" href="/assets/custom.css">
-
-
-
-
-
-
-    <style type="text/css">
-        /* The Modal (background) */
-        .modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1001;
-            /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-
-        }
-
-        /* Modal Content/Box */
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 100px auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-        }
-
-
-        /* Image grid */
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 10px;
-        }
-
-        /* Images */
-        .image-grid img {
-            width: 100%;
-            height: auto;
-        }
-
-        .blink {
-            color: mediumblue;
-        }
-
-        .blink_second {
-            color: red;
-        }
-
-        .blink_third {
-            color: yellow;
-        }
-
-        .apartment-form {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            border:
-        }
-
-        .apartment-form .form-group .addbutton {
-            background-color: #007bff;
-            color: #fff;
-            border:
-
-        }
-
-        .text-pop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: rgba(0, 0, 0, 0.757);
-            z-index: 100;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.4s;
-        }
-
-        .open-pop {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .text-pop .pop-content {
-            position: absolute;
-            width: 90%;
-            margin: 100px 0px;
-            background: white;
-            padding: 30px 30px 0px 30px;
-            border-radius: 10px;
-            opacity: 0;
-            visibility: hidden;
-            margin-top: 140px;
-            transition: 0.4s;
-        }
-
-        .open-pop .pop-content {
-            opacity: 1;
-            visibility: visible;
-            margin-top: 100px;
-        }
-    </style>
     @livewireStyles
 </head>
 
-<body class="dashboard-page">
-
-    <div id="main">
-
-        <!---- Header  ----->
-        @include('layouts.header')
-
-
-        <!----- Sidebar  ------->
-        <aside id="sidebar_left" class="nano nano-light affix">
-
-            <!-------- Sidebar Left Wrapper  -------->
-            <div class="sidebar-left-content nano-content">
-
-                <header class="sidebar-header">
-
-                    @include('layouts.sidebar')
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        @include('layouts.sidebar')
+        <!-- sidebar -->
 
 
 
-            </div>
+        <div id="page-content-wrapper">
+            <!-- Page header-->
+            @include('layouts.header')
 
-
-        </aside>
-
-        <section id="content_wrapper">
-            <!-- yield section  -->
 
             @yield('content')
 
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                var el = document.getElementById("wrapper");
+                var toggleButton = document.getElementById("menu-toggle");
 
-        </section>
+                toggleButton.onclick = function() {
+                    el.classList.toggle("toggled");
+                };
+            </script>
 
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    var fileCount = 1;
 
-    </div>
+                    // Handle add file button click
+                    $('#addFile').click(function() {
+                        fileCount++;
+                        var newInput = $('<div class="file-upload"><label for="file' + fileCount + '">File ' +
+                            fileCount + ':</label><input type="file" id="file' + fileCount +
+                            '" name="files[]" class="file"><button type="button" class="remove-file">Remove</button></div>'
+                        );
+                        $('#fileUploads').append(newInput);
+                    });
+                    // Handle remove file button click
+                    $(document).on('click', '.remove-file', function() {
+                        $(this).parent().remove();
+                    });
+                });
+            </script>
+            <script>
+                $(document).ready(function() {
+                    // Add new feature input field
+                    $('#add-feature').click(function() {
+                        var feature = '<div class="feature">' +
+                            '<input type="text" name="features[]" class="form-control">' +
+                            '<button type="button" class="remove-feature btn btn-danger">Remove</button>' +
+                            '</div>';
+                        $('#features-container').append(feature);
+                    });
+                    // Remove feature input field
+                    $(document).on('click', '.remove-feature', function() {
+                        $(this).closest('.feature').remove();
+                    });
+                });
+            </script>
+            <script>
+                $('#addModal').on('shown.bs.modal', function () {
+                $('#myInput').trigger('focus')})
+            </script>
 
-    <!-- -------- Scripts ------- -->
-
-    <!-- ----- jQuery --------- -->
-    <script src="/assets/js/jquery/jquery-1.11.3.min.js"></script>
-
-    <!-- ------- Theme Scripts ------- -->
-    <script src="/assets/js/utility/utility.js"></script>
-    <script src="/assets/js/demo/demo.js"></script>
-    <script src="/assets/js/main.js"></script>
-
-    <!-- --------- Widget JS ------- -->
-
-    <script src="/assets/js/pages/dashboard1.js"></script>
-
-    @livewireScripts
+            @livewireScripts
 
 </body>
 

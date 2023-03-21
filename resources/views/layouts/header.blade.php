@@ -1,68 +1,36 @@
-<header class="navbar navbar-fixed-top bg-system">
-    <div class="navbar-logo-wrapper bg-system">
-        <a class="navbar-logo-text" href="#">
-            <b> WEVR </b>
-        </a>
-
-        <span id="sidebar_left_toggle" class="ad ad-lines"></span>
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+    <div class="d-flex align-items-center">
+        <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+        <h2 class="fs-2 m-0">Dashboard</h2>
     </div>
-    <ul class="nav navbar-nav navbar-left">
-        <li class="hidden-xs">
-            <a class="navbar-fullscreen toggle-active" href="#">
-                <span class="glyphicon glyphicon-fullscreen"></span>
-            </a>
-        </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown dropdown-fuse">
-            <div class="navbar-btn btn-group">
-        <li class="dropdown dropdown-fuse">
-            <a href="#" class="dropdown-toggle fw600" data-toggle="dropdown">
-                <span class="hidden-xs">
-                    <name>Hr Amir Nagy</name>
-                </span>
-                <span class="fa fa-caret-down hidden-xs mr15"></span>
-                {{-- @if (isset(\Auth::user()->employee->photo))
-                    <img src="{{asset('photos/'.\Auth::user()->employee->photo)}}" width="50px" height="50px" alt="avatar" class="mw55">
-                @else --}}
-                <img src="{{asset('assets/img/avatars/logo.png')}}" alt="avatar" class="mw55">
-                {{-- @endif --}}
-            </a>
-            </a>
-            <ul class="dropdown-menu list-group keep-dropdown w250" role="menu">
-                {{-- @if (\Route::getFacadeRoot()->current()->uri() != 'change-password')
-                    <li class="dropdown-footer text-center">
-                        <a href="/change-password" class="btn btn-primary btn-sm btn-bordered">
-                            <span class="fa fa-lock pr5"></span> Change Password </a>
-                    </li>
-                    @endif --}}
 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                {{-- <li class="dropdown-footer text-center">
-                    <x-dropdown-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
-                    </x-dropdown-link>
-
-                </li> --}}
-
-
-                <li class="dropdown-footer text-center">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user me-2"></i>John Doe
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a href="#" class="btn btn-primary btn-sm btn-bordered"
+                        <a href="#" class="dropdown-item"
                             onclick="event.preventDefault();
-                            this.closest('form').submit();">
-
-                            <span class="fa fa-power-off pr5"></span> Logout
+                            this.closest('form').submit();">Logout
                         </a>
 
                     </form>
-                </li>
-            </ul>
-        </li>
-    </ul>
 
-
-</header>
-
-
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

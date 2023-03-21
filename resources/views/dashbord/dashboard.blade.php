@@ -1,88 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- -------------- Topbar -------------- -->
-    <header id="topbar" class="alt">
-        <div class="topbar-left">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-icon">
-                    <a href="">
-                        <span class="fa fa-home"></span>
-                    </a>
-                </li>
-                <li class="breadcrumb-active">
-                    <a href="">Dashboard</a>
-                </li>
-                <li class="breadcrumb-link">
-                    <a href="/">Home</a>
-                </li>
-                <li class="breadcrumb-current-item">Dashboard</li>
-            </ol>
-        </div>
+<div class="container-fluid px-4">
+    <div class="row g-3 my-2">
+        <div class="col-md-3">
+            <div class="p-3 bg-white  d-flex justify-content-around align-items-center rounded">
+                <div>
+                    <h6 style="color: rgb(85, 85, 85);">Upload Product</h6>
 
-    </header>
-    <!-- -------------- /Topbar -------------- -->
-
-    <!-- -------------- Content -------------- -->
-    <section id="content" class="table-layout animated fadeIn">
-
-        <!-- -------------- Column Center -------------- -->
-        <div class="chute chute-center">
-
-            <!-- -------------- Quick Links -------------- -->
-            <div class="row">
-
-                <div class="col-sm-6 col-xl-3">
-                    <div class="panel panel-tile">
-                        <div class="panel-body">
-                            <div class="row pv10">
-                                <div class="col-xs-5 ph10">
-                                    <img src="/assets/img/pages/upload.jpg" style="height:70px; border-radius:50%; width: 70px;"  class="img-responsive mauto" alt="" />
-                                </div>
-                                <div class="col-xs-7 pl5">
-                                    <h4 class="text-muted"><a href=""> Upload Product</a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="panel panel-tile">
-                        <div class="panel-body">
-                            <div class="row pv10">
-                                <div class="col-xs-5 ph10"><img src="/assets/img/pages/auction.jpg" style="height:70px; border-radius:50%; width:70px"
-                                        class="img-responsive mauto" alt="" /></div>
-                                <div class="col-xs-7 pl5">
-                                    <h4 class="text-muted"><a href=""> Auction </a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
+                        class="fas fa-cloud-upload-alt fs-3   rounded-full secondary-bg p-3 "
+                        style="color: #4154f1;
+                    background: #f6f6fe; "></i>
                 </div>
-
-
-
-
-
-                <div class="col-sm-6 col-xl-3">
-                    <div class="panel panel-tile">
-                        <div class="panel-body">
-                            <div class="row pv10">
-                                <div class="col-xs-5 ph10" ><img src="{{asset('assets/img/pages/policies2.jpg')}}" style="height:70px; border-radius:50%; width:70px"
-                                        class="img-responsive mauto" alt="" /></div>
-                                <div class="col-xs-7 pl5">
-                                    <h4 class="text-muted"><a href=""> Policies </a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
+                <!--<i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>-->
             </div>
         </div>
-    </section>
+
+        <div class="col-md-3">
+            <div class="p-3 bg-white  d-flex justify-content-around align-items-center rounded">
+                <div>
+                    <h6 style="color:rgb(85, 85, 85);">Auction</h6>
+
+                </div>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
+                        class="fas fa-gavel fs-3   rounded-full secondary-bg p-3 "
+                        style="color: #2eca6a;
+                    background: #e0f8e9; "></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="p-3 bg-white  d-flex justify-content-around align-items-center rounded">
+                <div>
+                    <h6 style="color:rgb(85, 85, 85);">Policies</h6>
+
+                </div>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
+                        class="fas fa-file-contract fs-3   rounded-full secondary-bg p-3 "
+                        style="color: #ff771d;
+                    background: #ffecdf; "></i>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
 @endsection

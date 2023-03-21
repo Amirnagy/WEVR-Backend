@@ -23,7 +23,7 @@ use App\Http\Controllers\Dashbord\ApartmentDiscount;
 
 Route::group(['middleware'=>['auth:sanctum']],function () {
 
-Route::get('/dashbord', function () {
+Route::get('/dashbord', function(){
     return view('dashbord.dashboard');
 });
 
@@ -36,7 +36,7 @@ Route::controller(ApartmentController::class)->group(function(){
 Route::controller(ApartmentDiscount::class)->group(function(){
 
     Route::get('discount','makeDiscount')->name('discount');
-    
+
 });
 
 Route::get('/',function (){

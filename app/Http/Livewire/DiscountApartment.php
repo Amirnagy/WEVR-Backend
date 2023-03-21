@@ -124,23 +124,9 @@ class DiscountApartment extends Component
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function render()
     {
-        return view('livewire.discount-apartment',[
+        return view('livewire.discount.discount-apartment',[
             'apartments' => $this->user->Apartment()->paginate(10)
         ]);
     }

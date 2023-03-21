@@ -15,7 +15,7 @@ class ApartmentController extends Controller
 
     public function showApartments()
     {
-        return view('dashbord.apartments.add');
+        return view('dashbord.apartments.ListApartment');
     }
 
     public function postApartments(Request $request)

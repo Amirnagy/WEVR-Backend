@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('apartmentdetails', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('apartment_id')->references('id')->on('Apartments')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('apartment_id')->references('id')->on('apartments')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('monthprice')->nullable();
             $table->integer('yearprice')->nullable();
             $table->smallInteger('livingroom');
