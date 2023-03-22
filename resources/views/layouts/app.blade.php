@@ -89,6 +89,30 @@
                 $('#addModal').on('shown.bs.modal', function () {
                 $('#myInput').trigger('focus')})
             </script>
+            <script>
+            // open and only close modal
+            // Get the modal
+            var modal = document.getElementById("myModal");
+            // Get all the buttons with the class "modalBtn"
+            var buttons = document.getElementsByClassName("modalBtn");
+            // Loop through all the buttons and attach click event listeners
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function() {
+                    // Wait for 3 seconds before displaying the modal
+                    setTimeout(function() {
+                        modal.style.display = "block";
+                        document.body.style.overFlowY = 'hidden';
+                    }, 1000);
+                }
+            }
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    document.body.style.overFlowY = 'auto';
+                }
+            }
+        </script>
 
             @livewireScripts
 
