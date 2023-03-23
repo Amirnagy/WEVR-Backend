@@ -39,7 +39,11 @@
 
             @yield('content')
 
+
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
             <script>
                 var el = document.getElementById("wrapper");
                 var toggleButton = document.getElementById("menu-toggle");
@@ -49,71 +53,36 @@
                 };
             </script>
 
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            {{-- modal of Show image --}}
             <script>
-                $(document).ready(function() {
-                    var fileCount = 1;
-
-                    // Handle add file button click
-                    $('#addFile').click(function() {
-                        fileCount++;
-                        var newInput = $('<div class="file-upload"><label for="file' + fileCount + '">File ' +
-                            fileCount + ':</label><input type="file" id="file' + fileCount +
-                            '" name="files[]" class="file"><button type="button" class="remove-file">Remove</button></div>'
-                        );
-                        $('#fileUploads').append(newInput);
-                    });
-                    // Handle remove file button click
-                    $(document).on('click', '.remove-file', function() {
-                        $(this).parent().remove();
-                    });
-                });
-            </script>
-            <script>
-                $(document).ready(function() {
-                    // Add new feature input field
-                    $('#add-feature').click(function() {
-                        var feature = '<div class="feature">' +
-                            '<input type="text" name="features[]" class="form-control">' +
-                            '<button type="button" class="remove-feature btn btn-danger">Remove</button>' +
-                            '</div>';
-                        $('#features-container').append(feature);
-                    });
-                    // Remove feature input field
-                    $(document).on('click', '.remove-feature', function() {
-                        $(this).closest('.feature').remove();
-                    });
-                });
-            </script>
-            <script>
-                $('#addModal').on('shown.bs.modal', function () {
-                $('#myInput').trigger('focus')})
-            </script>
-            <script>
-            // open and only close modal
-            // Get the modal
-            var modal = document.getElementById("myModal");
-            // Get all the buttons with the class "modalBtn"
-            var buttons = document.getElementsByClassName("modalBtn");
-            // Loop through all the buttons and attach click event listeners
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].onclick = function() {
-                    // Wait for 3 seconds before displaying the modal
-                    setTimeout(function() {
-                        modal.style.display = "block";
-                        document.body.style.overFlowY = 'hidden';
-                    }, 1000);
+                // open and only close modal
+                // Get the modal
+                var modal = document.getElementById("myModal");
+                // Get all the buttons with the class "modalBtn"
+                var buttons = document.getElementsByClassName("modalBtn");
+                // Loop through all the buttons and attach click event listeners
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].onclick = function() {
+                        // Wait for 1 seconds before displaying the modal
+                        setTimeout(function() {
+                            modal.style.display = "block";
+                            document.body.style.overFlowY = 'hidden';
+                        }, 1000);
+                    }
                 }
-            }
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                    document.body.style.overFlowY = 'auto';
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                        document.body.style.overFlowY = 'auto';
+                    }
                 }
-            }
-        </script>
-
+            </script>
+            <script>
+                window.addEventListener('close-modal', event => {
+                    $('#addModal').modal('hide');
+                })
+                </script>
             @livewireScripts
 
 </body>

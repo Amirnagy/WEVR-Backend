@@ -9,15 +9,11 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="image-grid">
-
-                    <img src="http://127.0.0.1:8000/gallaryaprtments/4384891679258754Rectangle 176.png" alt="">
-                    <img src="http://127.0.0.1:8000/gallaryaprtments/7652811679258754Rectangle 177.png" alt="">
-                    <img src="http://127.0.0.1:8000/gallaryaprtments/8181161679258754Rectangle 178.png" alt="">
-                    {{-- @if (isset($apartmentImages) && count($apartmentImages) > 0)
+                    @if (isset($apartmentImages) && count($apartmentImages) > 0)
                         @foreach ($apartmentImages as $apartmentImage)
                             <img src="{{ $apartmentImage }}" alt="">
                         @endforeach
-                    @endif --}}
+                    @endif
                 </div>
             </div>
         </div>
@@ -33,14 +29,20 @@
     {{-- ==================================== --}}
 
     <div class="container">
-        @if (Session::has('success'))
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
+        @if (session()->has('message'))
+            <div id="flash-message" class="alert alert-success">
+                {{ session('message') }}
             </div>
+            <script>
+                setTimeout(function() {
+                    $('#flash-message').fadeOut('fast');
+                }, 1000); // Set the delay to one second (1000ms)
+            </script>
         @endif
         <h2>Apartments List</h2>
         {{-- button add  --}}
-        <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#addModal">
+        <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal"
+            data-target="#addModal">
             add apartment
         </button>
         <div class="box">
@@ -86,17 +88,22 @@
                                     image</button>
                             </th>
                             <td>
-                                <a data-toggle="modal" data-target="#updateModal" href="#">
+                                <a data-toggle="modal" data-target="#updateModal"
+                                wire:loading.attr="disabled" wire:target="edit({{ $apartment->id }})">
                                     <i class="material-icons" style="color: rgb(4, 230, 34);"
                                         title="Edit">&#xE254;</i></a>
-                                <a href="#"> <i class="material-icons" style="color: red;"
-                                        title="Delete">&#xE872;</i></a>
+                                <a wire:click="deleteApartment({{ $apartment->id }})" style="cursor: pointer;"> <i
+                                        class="material-icons" style="color: red;" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                     @endforeach
 
                 </tbody>
             </table>
+            {{ $apartments->links('') }}
+
+
+
         </div>
-        
+
     </div>

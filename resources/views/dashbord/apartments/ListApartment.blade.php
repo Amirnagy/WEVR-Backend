@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-@livewire('dashboard.apartments')
+    @livewire('dashboard.apartments')
 @endsection()

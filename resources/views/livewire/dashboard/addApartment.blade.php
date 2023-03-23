@@ -1,24 +1,36 @@
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true"
+    wire:ignore.self>
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="addModal">Add Apartment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ Route('addApartments') }}" enctype="multipart/form-data">
+            @if (session()->has('success'))
+                <div id="flash-message" class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                <script>
+                    setTimeout(function() {
+                        $('#flash-message').fadeOut('fast');
+                    }, 1000); // Set the delay to one second (1000ms)
+                </script>
+            @endif
+            <form method="POST" enctype="multipart/form-data" wire:submit.prevent='PostApartments'>
+                @csrf
+                @error('link')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
                 <div class="modal-body">
-                    @csrf
-
-                    @error('link')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-
                     <label for="link">Link:</label>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="link" id="link" required value="{{ old('link') }}">
+                        <input class="form-control" type="text" id="link" @error('link') is-invalid @enderror
+                            wire:model.defer="link">
                     </div>
+
 
                     @error('price')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -26,17 +38,9 @@
 
                     <label for="price">Price per month:</label>
                     <div class="form-group">
-                        <input class="form-control" type="number" name="price" id="price" required value="{{ old('price') }}">
+                        <input class="form-control" type="number" id="price" required
+                            @error('price') is-invalid @enderror wire:model.defer="price">
                     </div>
-
-                    {{-- @error('discount')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-
-                    <div class="form-group">
-                        <label for="discount">Discount:</label>
-                        <input type="number" name="discount" id="discount" required>
-                    </div> --}}
 
                     @error('location')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -44,28 +48,31 @@
 
                     <label for="location">Location:</label>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="location" id="location" required value="{{ old('location') }}">
+                        <input class="form-control" type="text" id="location" required
+                            @error('location') is-invalid @enderror wire:model.defer="location">
                     </div>
 
                     @error('num_bedrooms')
-                        <div class="alert alert-danger" {{ old('link') }}>{{ $message }}</div>
+                        <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="num_bedrooms">Number of Bedrooms:</label>
                     <div class="form-group">
-                        <input class="form-control" type="number" name="num_bedrooms" id="num_bedrooms" required
-                            value="{{ old('num_bedrooms') }}">
+                        <input class="form-control" type="number" name="num_bedrooms" required
+                            wire:model.defer="num_bedrooms">
                     </div>
 
                     @error('num_living_rooms')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
+
                     <label for="num_living_rooms">Number of Living Rooms:</label>
                     <div class="form-group">
-                        <input class="form-control" type="number" name="num_living_rooms" id="num_living_rooms" required
-                            value="{{ old('num_living_rooms') }}">
+                        <input class="form-control" type="number" id="num_living_rooms" required
+                            @error('num_living_rooms') is-invalid @enderror wire:model.defer="num_living_rooms">
                     </div>
+
 
                     @error('num_bathrooms')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -73,9 +80,10 @@
 
                     <label for="num_bathrooms">Number of Bathrooms:</label>
                     <div class="form-group">
-                        <input class="form-control" type="number" name="num_bathrooms" id="num_bathrooms" required
-                            value="{{ old('num_bathrooms') }}">
+                        <input class="form-control" type="number" id="num_bathrooms" required
+                            @error('num_bathrooms') is-invalid @enderror wire:model.defer="num_bathrooms">
                     </div>
+
 
 
                     @error('num_parking')
@@ -84,8 +92,8 @@
 
                     <label for="num_parking">Number of Parking:</label>
                     <div class="form-group">
-                        <input class="form-control" type="number" name="num_parking" id="num_parking" required
-                            value="{{ old('num_parking') }}">
+                        <input class="form-control" type="number" id="num_parking" required
+                            @error('num_parking') is-invalid @enderror wire:model.defer="num_parking">
                     </div>
 
                     @error('num_floors')
@@ -94,9 +102,10 @@
 
                     <label for="num_floors">Number of Floors:</label>
                     <div class="form-group">
-                        <input class="form-control" type="number" name="num_floors" id="num_floors" required
-                            value="{{ old('num_floors') }}">
+                        <input class="form-control" type="number" id="num_floors" required
+                            @error('num_floors') is-invalid @enderror wire:model.defer="num_floors">
                     </div>
+
 
                     @error('area')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -104,8 +113,10 @@
 
                     <label for="area">Area:</label>
                     <div class="form-group">
-                        <input class="form-control" type="number" name="area" id="area" required value="{{ old('area') }}">
+                        <input class="form-control" type="number" id="area" required
+                            @error('area') is-invalid @enderror wire:model.defer="area">
                     </div>
+
 
 
                     @error('description')
@@ -114,7 +125,8 @@
 
                     <label for="description">Description:</label>
                     <div class="form-group">
-                        <textarea class="form-control" name="description" id="description" required value="{{ old('description') }}"></textarea>
+                        <textarea class="form-control" id="description" required @error('description') is-invalid @enderror
+                            wire:model.defer="description"></textarea>
                     </div>
 
 
@@ -124,44 +136,44 @@
 
                     <label for="ratings">Ratings:</label>
                     <div class="form-group">
-                        <input class="form-control" type="number" name="ratings" id="ratings" required value="{{ old('ratings') }}">
+                        <input class="form-control" type="number" id="ratings" required
+                            @error('ratings') is-invalid @enderror wire:model.defer="ratings">
                     </div>
 
-                    @error('features.*')
+
+                    @error('features')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                    <label for="features-container">Features:</label>
+
+                    <label for="features-container">Features : </label>
+                    <label>write every feature followed by (/) :</label>
                     <div class="form-group">
                         <div id="features-container">
                             <div class="feature">
-                                <input type="text" name="features[]" class="form-control">
-                                <button type="button" class="remove-feature btn btn-danger">Remove</button>
+                                <input type="text" class="form-control" @error('features') is-invalid @enderror
+                                    wire:model.defer="features">
                             </div>
                         </div>
-                        <button type="button" id="add-feature" class="btn btn-primary">Add Feature</button>
                     </div>
 
+                    <br>
 
-                    @error('files.*')
+                    @error('files')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+
                     <div id="fileUploads">
                         <div class="file-upload">
-                            <label for="file1">File 1:</label>
-                            <input type="file" id="file1" name="files[]" class="file">
-                            <button type="button" class="remove-file">Remove</button>
+                            <label for="file1">Photos:</label>
+                            <input type="file" id="file1" class="file" @error('files') is-invalid @enderror
+                                wire:model.defer="files" multiple>
                         </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <button type="button" id="addFile" class="addbutton">Add Another File</button>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">add</button>
+                    <input type="submit" class="btn btn-primary" value='add'>
                 </div>
             </form>
         </div>
