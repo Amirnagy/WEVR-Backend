@@ -12,6 +12,7 @@
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic' rel='stylesheet'
             type='text/css'>
         <!-- Scripts -->
+        <link rel="shortcut icon" href={{asset("assets/landingpage/pics/sec-logo.png")}} type="image/x-icon">
 
     <!-- -------------- CSS - theme -------------- -->
     <link rel="stylesheet" type="text/css" href={{asset('assets/skin/default_skin/css/theme.css')}}>

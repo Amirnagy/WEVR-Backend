@@ -1,5 +1,5 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true"
-    wire:ignore.self>
+    wire:ignore >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,16 +8,6 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @if (session()->has('success'))
-                <div id="flash-message" class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                <script>
-                    setTimeout(function() {
-                        $('#flash-message').fadeOut('fast');
-                    }, 1000); // Set the delay to one second (1000ms)
-                </script>
-            @endif
             <form method="POST" enctype="multipart/form-data" wire:submit.prevent='PostApartments'>
                 @csrf
                 @error('link')
@@ -179,3 +169,5 @@
         </div>
     </div>
 </div>
+
+

@@ -21,6 +21,7 @@ class Apartment extends Model
         'dimensions',
         'descrption',
         'features',
+        'rating'
 
     ];
     protected $casts = [

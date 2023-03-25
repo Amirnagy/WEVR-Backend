@@ -1,5 +1,7 @@
+@if ($updateApartment)
+
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModal" aria-hidden="true"
-    wire:ignore.self>
+wire:ignore>
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,7 +20,7 @@
                     }, 1000); // Set the delay to one second (1000ms)
                 </script>
             @endif
-            <form method="POST" enctype="multipart/form-data" wire:submit.prevent='PostApartments'>
+            <form method="POST" enctype="multipart/form-data" wire:submit.prevent='postUpdate({{$IDapartment}})'>
                 @csrf
                 @error('link')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -28,7 +30,7 @@
                     <label for="link">Link:</label>
                     <div class="form-group">
                         <input class="form-control" type="text" id="link" @error('link') is-invalid @enderror
-                            wire:model.defer="link">
+                            wire:model.defer="update_link">
                     </div>
 
 
@@ -39,7 +41,7 @@
                     <label for="price">Price per month:</label>
                     <div class="form-group">
                         <input class="form-control" type="number" id="price" required
-                            @error('price') is-invalid @enderror wire:model.defer="price">
+                            @error('price') is-invalid @enderror wire:model.defer="update_price">
                     </div>
 
                     @error('location')
@@ -49,7 +51,7 @@
                     <label for="location">Location:</label>
                     <div class="form-group">
                         <input class="form-control" type="text" id="location" required
-                            @error('location') is-invalid @enderror wire:model.defer="location">
+                            @error('location') is-invalid @enderror wire:model.defer="update_location">
                     </div>
 
                     @error('num_bedrooms')
@@ -59,7 +61,7 @@
                     <label for="num_bedrooms">Number of Bedrooms:</label>
                     <div class="form-group">
                         <input class="form-control" type="number" name="num_bedrooms" required
-                            wire:model.defer="num_bedrooms">
+                            wire:model.defer="update_num_bedrooms">
                     </div>
 
                     @error('num_living_rooms')
@@ -70,7 +72,7 @@
                     <label for="num_living_rooms">Number of Living Rooms:</label>
                     <div class="form-group">
                         <input class="form-control" type="number" id="num_living_rooms" required
-                            @error('num_living_rooms') is-invalid @enderror wire:model.defer="num_living_rooms">
+                            @error('num_living_rooms') is-invalid @enderror wire:model.defer="update_num_living_rooms">
                     </div>
 
 
@@ -81,7 +83,7 @@
                     <label for="num_bathrooms">Number of Bathrooms:</label>
                     <div class="form-group">
                         <input class="form-control" type="number" id="num_bathrooms" required
-                            @error('num_bathrooms') is-invalid @enderror wire:model.defer="num_bathrooms">
+                            @error('num_bathrooms') is-invalid @enderror wire:model.defer="update_num_bathrooms">
                     </div>
 
 
@@ -93,7 +95,7 @@
                     <label for="num_parking">Number of Parking:</label>
                     <div class="form-group">
                         <input class="form-control" type="number" id="num_parking" required
-                            @error('num_parking') is-invalid @enderror wire:model.defer="num_parking">
+                            @error('num_parking') is-invalid @enderror wire:model.defer="update_num_parking">
                     </div>
 
                     @error('num_floors')
@@ -103,7 +105,7 @@
                     <label for="num_floors">Number of Floors:</label>
                     <div class="form-group">
                         <input class="form-control" type="number" id="num_floors" required
-                            @error('num_floors') is-invalid @enderror wire:model.defer="num_floors">
+                            @error('num_floors') is-invalid @enderror wire:model.defer="update_num_floors">
                     </div>
 
 
@@ -114,7 +116,7 @@
                     <label for="area">Area:</label>
                     <div class="form-group">
                         <input class="form-control" type="number" id="area" required
-                            @error('area') is-invalid @enderror wire:model.defer="area">
+                            @error('area') is-invalid @enderror wire:model.defer="update_area">
                     </div>
 
 
@@ -126,7 +128,7 @@
                     <label for="description">Description:</label>
                     <div class="form-group">
                         <textarea class="form-control" id="description" required @error('description') is-invalid @enderror
-                            wire:model.defer="description"></textarea>
+                            wire:model.defer="update_description"></textarea>
                     </div>
 
 
@@ -137,7 +139,7 @@
                     <label for="ratings">Ratings:</label>
                     <div class="form-group">
                         <input class="form-control" type="number" id="ratings" required
-                            @error('ratings') is-invalid @enderror wire:model.defer="ratings">
+                            @error('ratings') is-invalid @enderror wire:model.defer="update_ratings">
                     </div>
 
 
@@ -151,13 +153,16 @@
                         <div id="features-container">
                             <div class="feature">
                                 <input type="text" class="form-control" @error('features') is-invalid @enderror
-                                    wire:model.defer="features">
+                                    wire:model.defer="update_features">
                             </div>
                         </div>
                     </div>
 
                     <br>
 
+                    @foreach ($update_apartmentImages as $image )
+                        <img src="{{$image}}" alt="">
+                    @endforeach
                     @error('files')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -166,7 +171,7 @@
                         <div class="file-upload">
                             <label for="file1">Photos:</label>
                             <input type="file" id="file1" class="file" @error('files') is-invalid @enderror
-                                wire:model.defer="files" multiple>
+                                wire:model.defer="update_files" multiple>
                         </div>
                     </div>
 
@@ -179,3 +184,5 @@
         </div>
     </div>
 </div>
+
+@endif

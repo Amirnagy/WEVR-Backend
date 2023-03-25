@@ -8,30 +8,48 @@ use App\Models\Apartment;
 use Livewire\WithFileUploads;
 use App\Models\Apartmentdetails;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 
 class Apartments extends Component
 {
     use WithFileUploads,WithPagination;
     public $user;
-    public $apartmentImages;
+    public $IDapartment;
     public $link;
-    public $price;
     public $location;
+    public $area;
+    public $description;
+    public $features;
+    public $ratings;
+
+    public $price;
     public $num_bedrooms;
     public $num_living_rooms;
     public $num_bathrooms;
     public $num_parking;
     public $num_floors;
-    public $area;
-    public $description;
-    public $ratings;
-    public $features;
-    public $gallary=[];
     public $files=[];
 
+
+    public $update_link;
+    public $update_location;
+    public $update_area;
+    public $update_description;
+    public $update_features;
+    public $update_ratings;
+
+    public $update_price;
+    public $update_num_bedrooms;
+    public $update_num_living_rooms;
+    public $update_num_bathrooms;
+    public $update_num_parking;
+    public $update_num_floors;
+    public $update_files=[];
+
+    public $updateApartment = false;
+    public $update_apartmentImages;
+    public $showImages;
+    public $gallary=[];
 
     protected $rules = [
         'link' => 'required|url',
@@ -49,21 +67,40 @@ class Apartments extends Component
         'files.*' => 'required',
     ];
 
-    public function resetFields(){
-        $this->link = '';
-        $this->price = '';
-        $this->location = '';
-        $this->num_bedrooms = '';
-        $this->num_living_rooms = '';
-        $this->num_bathrooms = '';
-        $this->num_parking = '';
-        $this->num_floors = '';
-        $this->area = '';
-        $this->description = '';
-        $this->ratings = '';
-        $this->features = [];
-        $this->gallary = [];
-        $this->files=[];
+    public function resetFields($action){
+        if($action == 0)
+        {
+            $this->link = '';
+            $this->price = '';
+            $this->location = '';
+            $this->num_bedrooms = '';
+            $this->num_living_rooms = '';
+            $this->num_bathrooms = '';
+            $this->num_parking = '';
+            $this->num_floors = '';
+            $this->area = '';
+            $this->description = '';
+            $this->ratings = '';
+            $this->features = '';
+            $this->gallary = [];
+            $this->files=[];
+        }else{
+            $this->update_link = '';
+            $this->update_price = '';
+            $this->update_location = '';
+            $this->update_num_bedrooms = '';
+            $this->update_num_living_rooms = '';
+            $this->update_num_bathrooms = '';
+            $this->update_num_parking = '';
+            $this->update_num_floors = '';
+            $this->update_area = '';
+            $this->update_description = '';
+            $this->update_ratings = '';
+            $this->update_features = '';
+            $this->update_files=[];
+            $this->gallary = [];
+        }
+
     }
 
 
@@ -108,7 +145,7 @@ class Apartments extends Component
             foreach ($images as $file) {
                 $ImageName = rand(100000, 999999) . time() . $file->getClientOriginalName();
                 $path = $file->storeAs('gallaryaprtments', $ImageName, 'WEVR');
-                $this->gallary[] = env('APP_URL') . '/' . 'public' . '/' . $path;
+                $this->gallary[] = env('APP_URL') . '/' . $path;
             }
             $ApartmentGallary = new Gallary();
             $ApartmentGallary->apartment_id = $Apartment->id;
@@ -119,8 +156,8 @@ class Apartments extends Component
         if ($ApartmentGallary->save() && $ApartmentDetiles->save() && $Apartment->save()) {
             session()->flash('success',"Post added Successfully!!");
         }
-        $this->resetFields();
-        $this->dispatchBrowserEvent('close-modal',[]);
+        $this->resetFields(0);
+        $this->dispatchBrowserEvent('close-modal');
 
     }
 
@@ -132,17 +169,18 @@ class Apartments extends Component
             if ($Apartment->id == $ApartmentId) {
 
                 $apartment = Gallary::where('apartment_id', $ApartmentId)->first();
+                // dd($apartment);
                 if ($apartment) {
-                    $apartmentImages = $apartment->image;
-                    $apartmentImages = array_map('stripslashes', $apartmentImages);
-                    $this->apartmentImages = $apartmentImages;
+                    $this->showImages = $apartment->image;
                     break;
                 } else {
-                    return $this->apartmentImages = [];
+                    return $this->showImages = [];
                     break;
                 }
             }
         }
+        // dd($this->showImages);   
+        $this->dispatchBrowserEvent('open-modal1');
         // dd($this->apartmentImages);
 
     }
@@ -165,9 +203,77 @@ class Apartments extends Component
 
     public function UpdateApartment($ApartmentId)
     {
-        dd($ApartmentId);
+        $Apartment = Apartment::find($ApartmentId);
+        if($Apartment->user_id === $this->user->id )
+        {
+            $ApartmentUser = $Apartment->where('id',"$ApartmentId")->with('info')->with('gallary')->first();
+
+            $this->setvalues($ApartmentUser);
+
+            $this->updateApartment = true;
+
+        }
+        $this->dispatchBrowserEvent('open-modal');
     }
 
+    public function postUpdate($ApartmentId)
+    {
+        $this->validate([
+            'update_link' => 'required|url',
+            'update_price' => 'required|numeric',
+            'update_location' => 'required',
+            'update_num_bedrooms' => 'required|integer',
+            'update_num_living_rooms' => 'required|integer',
+            'update_num_bathrooms' => 'required|integer',
+            'update_num_parking' => 'nullable',
+            'update_num_floors' => 'required|integer',
+            'update_area' => 'required|integer',
+            'update_description' => 'required',
+            'update_ratings' => 'nullable|numeric|min:1',
+            'update_features' => 'required',
+            'update_files.*' => 'required']);
+
+        $this->update_features = $this->SplitFeatures($this->update_features);
+        if ($this->user) {
+            $Apartment = Apartment::find($ApartmentId);
+            if($Apartment->user_id === $this->user->id )
+                {
+                    $images = $this->update_files;
+                    foreach ($images as $file)
+                    {
+                        $ImageName = rand(100000, 999999) . time() . $file->getClientOriginalName();
+                        $path = $file->storeAs('gallaryaprtments', $ImageName, 'WEVR');
+                        $this->gallary[] = env('APP_URL') . '/' . $path;
+                    }
+                    $ApartmentUser = $Apartment->where('id',"$ApartmentId")->with('info')->with('gallary')->first();
+                    $this->gallary = array_merge($ApartmentUser->gallary->image,$this->gallary);
+                    $ApartmentUser->vrlink  = $this->update_link;
+                    $ApartmentUser->location = $this->update_location ;
+                    $ApartmentUser->descrption = $this->update_description;
+                    $ApartmentUser->features = $this->update_features;
+                    $ApartmentUser->rating = $this->update_ratings;
+                    // ===========================================================
+                    $ApartmentUser->info->monthprice = $this->update_price;
+                    $ApartmentUser->info->yearprice = $this->update_price * 12;
+                    $ApartmentUser->info->livingroom = $this->update_num_living_rooms ;
+                    $ApartmentUser->info->bedroom = $this->update_num_bedrooms;
+                    $ApartmentUser->info->parking = $this->update_num_parking;
+                    $ApartmentUser->info->baths = $this->update_num_bathrooms;
+                    $ApartmentUser->info->floors = $this->update_num_floors;
+                    $ApartmentUser->info->erea = $this->update_area;
+                    $ApartmentUser->gallary->image = $this->gallary;
+                    if($ApartmentUser->save() && $ApartmentUser->gallary->save() && $ApartmentUser->info->save()){
+                        $this->updateApartment = false;
+                    }
+                }
+
+
+        }
+
+
+        $this->resetFields(1);
+        $this->dispatchBrowserEvent('close-modal');
+    }
 
     public function mount()
     {
@@ -178,6 +284,44 @@ class Apartments extends Component
     protected function SplitFeatures($features)
     {
         return explode("/", $features);
+    }
+
+    protected function validateCustom()
+    {
+        $rules = [
+            'update_link' => 'required|url',
+            'update_price' => 'required|numeric',
+            'update_location' => 'required',
+            'update_num_bedrooms' => 'required|integer',
+            'update_num_living_rooms' => 'required|integer',
+            'update_num_bathrooms' => 'required|integer',
+            'update_num_parking' => 'nullable',
+            'update_num_floors' => 'required|integer',
+            'update_area' => 'required|integer',
+            'update_description' => 'required',
+            'update_ratings' => 'nullable|numeric|min:1',
+            'update_features' => 'required',
+            'update_files.*' => 'required',
+        ];
+        $this->validate($rules);
+    }
+
+    protected function setvalues($ApartmentUser)
+    {
+        $this->IDapartment = $ApartmentUser->id;
+        $this->update_price = $ApartmentUser->info->monthprice;
+        $this->update_num_bedrooms = $ApartmentUser->info->bedroom;
+        $this->update_num_living_rooms = $ApartmentUser->info->livingroom;
+        $this->update_num_bathrooms = $ApartmentUser->info->baths;
+        $this->update_num_parking = $ApartmentUser->info->parking;
+        $this->update_num_floors = $ApartmentUser->info->floors;
+        $this->update_area = $ApartmentUser->info->erea;
+        $this->update_description = $ApartmentUser->descrption;
+        $this->update_link = $ApartmentUser->vrlink;
+        $this->update_location = $ApartmentUser->location;
+        $this->update_ratings = $ApartmentUser->rating;
+        $this->update_features = implode($ApartmentUser->features);
+        $this->update_apartmentImages = $ApartmentUser->gallary->image;
     }
 
     public function render()

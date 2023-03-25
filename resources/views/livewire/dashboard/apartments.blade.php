@@ -1,25 +1,8 @@
 <div>
-    {{-- add table and button for add apartment by modal --}}
-
-    <!-- Button trigger modal -->
-
 
     <!-- Modal -->
-    <div id="myModal" class="modal" wire:ignore>
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="image-grid">
-                    @if (isset($apartmentImages) && count($apartmentImages) > 0)
-                        @foreach ($apartmentImages as $apartmentImage)
-                            <img src="{{ $apartmentImage }}" alt="">
-                        @endforeach
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
 
-
+    @include('livewire.dashboard.modalShowImage')
     <!-- Modal add -->
     @include('livewire.dashboard.addApartment')
 
@@ -29,6 +12,16 @@
     {{-- ==================================== --}}
 
     <div class="container">
+        @if (session()->has('success'))
+            <div id="flash-message" class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            <script>
+                setTimeout(function() {
+                    $('#flash-message').fadeOut('fast');
+                }, 1000); // Set the delay to one second (1000ms)
+            </script>
+        @endif
         @if (session()->has('message'))
             <div id="flash-message" class="alert alert-success">
                 {{ session('message') }}
@@ -41,8 +34,7 @@
         @endif
         <h2>Apartments List</h2>
         {{-- button add  --}}
-        <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal"
-            data-target="#addModal">
+        <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#addModal">
             add apartment
         </button>
         <div class="box">
@@ -88,8 +80,7 @@
                                     image</button>
                             </th>
                             <td>
-                                <a data-toggle="modal" data-target="#updateModal"
-                                wire:loading.attr="disabled" wire:target="edit({{ $apartment->id }})">
+                                <a wire:click="UpdateApartment({{ $apartment->id }})" style="cursor: pointer;">
                                     <i class="material-icons" style="color: rgb(4, 230, 34);"
                                         title="Edit">&#xE254;</i></a>
                                 <a wire:click="deleteApartment({{ $apartment->id }})" style="cursor: pointer;"> <i
@@ -105,5 +96,22 @@
 
 
         </div>
+        @push('scripts')
+            <script>
+                window.addEventListener('close-modal', event => {
+                    $("#addModal").modal("hide");
+                });
+            </script>
+            <script>
+                window.addEventListener('open-modal', event => {
+                    $("#updateModal").modal("show");
+                });
+            </script>
+            <script>
+                window.addEventListener('open-modal1', event => {
+                    $("#showImage").modal("show");
+                });
+            </script>
 
+        @endpush
     </div>

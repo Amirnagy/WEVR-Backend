@@ -4,7 +4,11 @@
     --second-text-color: #bbbec5;
     --second-bg-color: #ffffff;
 }
+body{
+    scrollbar-width: none;
+    overflow: hidden;
 
+}
 .primary-text {
     color: var(--main-text-color);
 }
@@ -98,6 +102,7 @@
 {
     width: 100%;
     overflow: auto;
+    height: 70vh;
 }
 .box .table{
     width: 150%;
@@ -154,4 +159,19 @@
 .modal-backdrop
 {
     display: none !important;
+}
+
+.modalBtn{
+    border: 1px solid #009d63;
+    background-color: #009d63;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 3px;
+    transition: .3s;
+}
+
+.modalBtn:hover{
+    background: none;
+    color: #009d63;
+
 }
