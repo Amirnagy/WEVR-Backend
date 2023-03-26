@@ -12,13 +12,13 @@
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic' rel='stylesheet'
             type='text/css'>
         <!-- Scripts -->
-        <link rel="shortcut icon" href={{asset("assets/landingpage/pics/sec-logo.png")}} type="image/x-icon">
+        <link rel="shortcut icon" href={{asset("public/assets/landingpage/pics/sec-logo.png")}} type="image/x-icon">
 
     <!-- -------------- CSS - theme -------------- -->
-    <link rel="stylesheet" type="text/css" href={{asset('assets/skin/default_skin/css/theme.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('public/assets/skin/default_skin/css/theme.css')}}>
 
     <!-- -------------- CSS - allcp forms -------------- -->
-    <link rel="stylesheet" type="text/css" href={{asset("assets/allcp/forms/css/forms.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("public/assets/allcp/forms/css/forms.css")}}>
 
 
 
@@ -31,16 +31,16 @@
         </div>
 
 
-        <script src={{asset("assets/js/jquery/jquery-1.11.3.min.js")}}></script>
-        <script src={{asset("assets/js/jquery/jquery_ui/jquery-ui.min.js")}}></script>
+        <script src={{asset("public/assets/js/jquery/jquery-1.11.3.min.js")}}></script>
+        <script src={{asset("public/assets/js/jquery/jquery_ui/jquery-ui.min.js")}}></script>
 
         <!-- -------------- CanvasBG JS -------------- -->
-        <script src={{asset("assets/js/plugins/canvasbg/canvasbg.js")}}></script>
+        <script src={{asset("public/assets/js/plugins/canvasbg/canvasbg.js")}}></script>
 
         <!-- -------------- Theme Scripts -------------- -->
-        <script src={{asset("assets/js/utility/utility.js")}}></script>
-        <script src={{asset("assets/js/demo/demo.js")}}></script>
-        <script src={{asset("assets/js/main.js")}}></script>
+        <script src={{asset("public/assets/js/utility/utility.js")}}></script>
+        <script src={{asset("public/assets/js/demo/demo.js")}}></script>
+        <script src={{asset("public/assets/js/main.js")}}></script>
 
         <!-- -------------- Page JS -------------- -->
         <script type="text/javascript">
