@@ -20,7 +20,14 @@
         <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                 class="fas fa-file-contract me-3 " style="color: rgb(139, 136, 132);"></i>Company Policy</a>
 
-        <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
-                class="fas fa-power-off me-3"></i>Logout</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();"> <i
+                class="fas fa-power-off me-3"></i>Logout
+                    </a>
+
+                </form>
     </div>
 </div>

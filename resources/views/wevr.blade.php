@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link rel="stylesheet" href={{asset("assets/landingpage/css/wevr.css")}}>
-    <link rel="shortcut icon" href={{asset("assets/landingpage/pics/sec-logo.png")}} type="image/x-icon">
+    <link rel="stylesheet" href={{asset("public/assets/landingpage/css/wevr.css")}}>
+    <link rel="shortcut icon" href={{asset("public/assets/landingpage/pics/sec-logo.png")}} type="image/x-icon">
     <title>Wevr</title>
 </head>
 
@@ -21,8 +21,8 @@
             <div class="header-nav">
                 <div class="logo">
                     <a href="wevr.html">
-                        <img class="logo-1" src="{{asset('assets/landingpage/pics/white logo-01 1.png')}}" alt="">
-                        <img class="logo-2" src="{{asset('assets/landingpage/pics/sec-logo.png')}}" alt="">
+                        <img class="logo-1" src="{{asset('public/assets/landingpage/pics/white logo-01 1.png')}}" alt="">
+                        <img class="logo-2" src="{{asset('public/assets/landingpage/pics/sec-logo.png')}}" alt="">
                     </a>
                 </div>
 
@@ -48,7 +48,7 @@
                     </li>
 
                     <li class="side-icon">
-                        <img src="{{asset('assets/landingpage/pics/menu.png')}}" alt="" onclick="open_side()">
+                        <img src="{{asset('public/assets/landingpage/pics/menu.png')}}" alt="" onclick="open_side()">
                     </li>
                 </ul>
             </div>
@@ -63,7 +63,7 @@
                     <div class="side-content">
                         <div class="logo">
                             <a href="{{url('/')}}">
-                                <img src="{{asset('assets/landingpage/pics/white logo-01 1.png')}}" alt="">
+                                <img src="{{asset('public/assets/landingpage/pics/white logo-01 1.png')}}" alt="">
                             </a>
                         </div>
 
@@ -136,7 +136,7 @@
                 <div class="colom col-11 col-md-6 col-lg-5">
                     <div class="col-info">
                         <h4>Explore homes</h4>
-                        <img src="{{asset('assets/landingpage/pics/pngwing.png')}}" alt="">
+                        <img src="{{asset('public/assets/landingpage/pics/pngwing.png')}}" alt="">
 
                         <div class="desc">
                             <p>Easily search for any home and select</p>
@@ -149,7 +149,7 @@
                 <div class="colom col-11 col-md-6 col-lg-5">
                     <div class="col-info">
                         <h4>Virtual tour</h4>
-                        <img src="{{asset('assets/landingpage/pics/pngwing-1.png')}}" alt="">
+                        <img src="{{asset('public/assets/landingpage/pics/pngwing-1.png')}}" alt="">
 
                         <div class="desc">
                             <p>Virtual tour for each house to give</p>
@@ -162,7 +162,7 @@
                 <div class="colom col-11 col-md-6 col-lg-5">
                     <div class="col-info">
                         <h4>Online auction</h4>
-                        <img src="{{asset('assets/landingpage/pics/pngwing-3.png')}}" alt="">
+                        <img src="{{asset('public/assets/landingpage/pics/pngwing-3.png')}}" alt="">
 
                         <div class="desc">
                             <p>Ease in participating in real estate</p>
@@ -174,7 +174,7 @@
                 <div class="colom col-11 col-md-6 col-lg-5">
                     <div class="col-info">
                         <h4>Property owner</h4>
-                        <img src="{{asset('assets/landingpage/pics/pngwing-2.png')}}" alt="">
+                        <img src="{{asset('public/assets/landingpage/pics/pngwing-2.png')}}" alt="">
 
                         <div class="desc">
                             <p>Sell your property</p>
@@ -197,7 +197,7 @@
         <div class="row">
             <div class="col-12 col-sm-12 col-md-6">
                 <div class="col-img">
-                    <img src="{{asset('assets/landingpage/pics/Group 1000004664.png')}}" alt="">
+                    <img src="{{asset('public/assets/landingpage/pics/Group 1000004664.png')}}" alt="">
                 </div>
             </div>
 
@@ -236,10 +236,10 @@
 
                     <div class="imgs">
                         <a href="#">
-                            <img src="{{asset('assets/landingpage/pics/googleplay.png')}}" alt="">
+                            <img src="{{asset('public/assets/landingpage/pics/googleplay.png')}}" alt="">
                         </a>
                         <a href="#">
-                            <img src="{{asset('assets/landingpage/pics/appstore.png')}}" alt="">
+                            <img src="{{asset('public/assets/landingpage/pics/appstore.png')}}" alt="">
                         </a>
                     </div>
                 </div>
@@ -247,13 +247,13 @@
 
             <div class="col-6 col-md-5 col-lg-4">
                 <div class="col-img col-img-1">
-                    <img class="img-1" src="{{asset('assets/landingpage/pics/OWINJ61 copy.png')}}" alt="">
+                    <img class="img-1" src="{{asset('public/assets/landingpage/pics/OWINJ61 copy.png')}}" alt="">
                 </div>
             </div>
 
             <div class="col-4 col-md-4 col-lg-3">
                 <div class="col-img col-img-2">
-                    <img class="img-2" src="{{asset('assets/landingpage/pics/s89-pm-0083-03-card-mockup copy.png')}}" alt="">
+                    <img class="img-2" src="{{asset('public/assets/landingpage/pics/s89-pm-0083-03-card-mockup copy.png')}}" alt="">
                 </div>
             </div>
         </div>
@@ -278,7 +278,7 @@
                     <div class="item">
 
                         <div class="item-img">
-                            <img src="{{asset('assets/landingpage/pics/gad.jpg')}}" alt="">
+                            <img src="{{asset('public/assets/landingpage/pics/gad.jpg')}}" alt="">
                         </div>
 
                         <div class="item-data">
@@ -313,7 +313,7 @@
                 <div class="colom col-11 col-sm-9 col-md-6 col-lg-5 col-xl-3">
                     <div class="item">
                         <div class="item-img">
-                            <img src="{{asset('assets/landingpage/pics/amany.jpg')}}" alt="">
+                            <img src="{{asset('public/assets/landingpage/pics/amany.jpg')}}" alt="">
                         </div>
 
                         <div class="item-data">
@@ -348,7 +348,7 @@
                 <div class="colom col-11 col-sm-9 col-md-6 col-lg-5 col-xl-3">
                     <div class="item">
                         <div class="item-img">
-                            <img src="{{asset('assets/landingpage/pics/amir.jpg')}}" alt="">
+                            <img src="{{asset('public/assets/landingpage/pics/amir.jpg')}}" alt="">
                         </div>
 
                         <div class="item-data">
@@ -384,7 +384,7 @@
                 <div class="colom col-11 col-sm-9 col-md-6 col-md-6 col-lg-5 col-xl-3">
                     <div class="item">
                         <div class="item-img">
-                            <img src="{{asset('assets/landingpage/pics/safwa.jpg')}}" alt="">
+                            <img src="{{asset('public/assets/landingpage/pics/safwa.jpg')}}" alt="">
                         </div>
 
                         <div class="item-data">
@@ -419,7 +419,7 @@
                 <div class="colom col-11 col-sm-9 col-md-6 col-lg-5 col-xl-3">
                     <div class="item">
                         <div class="item-img">
-                            <img src="{{asset('assets/landingpage/pics/mawada.jpg')}}" alt="">
+                            <img src="{{asset('public/assets/landingpage/pics/mawada.jpg')}}" alt="">
                         </div>
 
                         <div class="item-data">
@@ -454,7 +454,7 @@
                 <div class="colom col-11 col-sm-9 col-md-6 col-lg-5 col-xl-3">
                     <div class="item">
                         <div class="item-img">
-                            <img src="{{asset('assets/landingpage/pics/abo4.jpg')}}" alt="">
+                            <img src="{{asset('public/assets/landingpage/pics/abo4.jpg')}}" alt="">
                         </div>
 
                         <div class="item-data">
@@ -536,7 +536,7 @@
                     <div class="colom col-6 col-lg-4">
                         <div class="logo">
                             <a href="wevr.html">
-                                <img src="{{asset('assets/landingpage/pics/sec-logo.png')}}" alt="">
+                                <img src="{{asset('public/assets/landingpage/pics/sec-logo.png')}}" alt="">
                             </a>
                         </div>
                     </div>
@@ -633,7 +633,7 @@
         <i class="bi bi-arrow-up"></i>
     </div>
 
-    <script src="{{asset('assets/landingpage/js/wevr.js')}}"></script>
+    <script src="{{asset('public/assets/landingpage/js/wevr.js')}}"></script>
 </body>
 
 </html>

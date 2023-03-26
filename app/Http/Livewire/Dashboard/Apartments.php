@@ -252,7 +252,7 @@ class Apartments extends Component
         $this->update_features = $this->SplitFeatures($this->update_features);
         if ($this->user) {
             $Apartment = Apartment::find($ApartmentId);
-            if($Apartment->user_id === $this->user->id )
+            if($Apartment->user_id == $this->user->id )
                 {
                     $images = $this->update_files;
                     foreach ($images as $file)

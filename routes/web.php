@@ -18,30 +18,29 @@ use App\Http\Controllers\Dashbord\ApartmentDiscount;
 */
 
 
+Route::get('/',function (){
+    return view('wevr');
+});
 
 
 
 Route::group(['middleware'=>['auth:sanctum']],function () {
 
-Route::get('/dashbord', function(){
-    return view('dashbord.dashboard');
+    Route::get('dashbord', function(){
+        return view('dashbord.dashboard');
+    });
+
+    Route::controller(ApartmentController::class)->group(function(){
+
+        Route::get('showApartments','showApartments')->name('showApartments');
+        Route::post('addApartments','postApartments')->name('addApartments');
+    });
+
+    Route::controller(ApartmentDiscount::class)->group(function(){
+        Route::get('discount','makeDiscount')->name('discount');
+
 });
 
-Route::controller(ApartmentController::class)->group(function(){
-
-    Route::get('showApartments','showApartments')->name('showApartments');
-    Route::post('addApartments','postApartments')->name('addApartments');
-});
-
-Route::controller(ApartmentDiscount::class)->group(function(){
-
-    Route::get('discount','makeDiscount')->name('discount');
-
-});
-
-Route::get('/',function (){
-    return view('wevr');
-});
 
 
 });
