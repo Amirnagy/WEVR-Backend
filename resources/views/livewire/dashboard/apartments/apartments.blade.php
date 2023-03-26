@@ -2,12 +2,12 @@
 
     <!-- Modal -->
 
-    @include('livewire.dashboard.modalShowImage')
+    @include('livewire.dashboard.apartments.modalShowImage')
     <!-- Modal add -->
-    @include('livewire.dashboard.addApartment')
+    @include('livewire.dashboard.apartments.addApartment')
 
     <!-- Modal update -->
-    @include('livewire.dashboard.updateApartment')
+    @include('livewire.dashboard.apartments.updateApartment')
 
     {{-- ==================================== --}}
 
@@ -34,7 +34,7 @@
         @endif
         <h2>Apartments List</h2>
         {{-- button add  --}}
-        <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#addModal">
+        <button type="button" class="btn btn-primary" style="float: right;" wire:click="addApartment">
             add apartment
         </button>
         <div class="box">
@@ -98,17 +98,27 @@
         </div>
         @push('scripts')
             <script>
+                window.addEventListener('open-modal', event => {
+                    $("#addModal").modal("show");
+                });
+            </script>
+            <script>
                 window.addEventListener('close-modal', event => {
                     $("#addModal").modal("hide");
                 });
             </script>
             <script>
-                window.addEventListener('open-modal', event => {
+                window.addEventListener('open-modal1', event => {
                     $("#updateModal").modal("show");
                 });
             </script>
             <script>
-                window.addEventListener('open-modal1', event => {
+                window.addEventListener('close-modal1', event => {
+                    $("#updateModal").modal("hide");
+                });
+            </script>
+            <script>
+                window.addEventListener('open-modal2', event => {
                     $("#showImage").modal("show");
                 });
             </script>

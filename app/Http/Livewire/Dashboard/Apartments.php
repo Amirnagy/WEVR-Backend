@@ -47,6 +47,7 @@ class Apartments extends Component
     public $update_files=[];
 
     public $updateApartment = false;
+    public $addApartment = false;
     public $update_apartmentImages;
     public $showImages;
     public $gallary=[];
@@ -103,6 +104,15 @@ class Apartments extends Component
 
     }
 
+    public function addApartment()
+    {
+        $this->resetFields(0);
+        $this->resetFields(1);
+        $this->updateApartment = false;
+        $this->addApartment = true;
+        $this->dispatchBrowserEvent('open-modal');
+
+    }
 
     public function PostApartments()
     {
@@ -157,6 +167,9 @@ class Apartments extends Component
             session()->flash('success',"Post added Successfully!!");
         }
         $this->resetFields(0);
+        $this->resetFields(1);
+        $this->addApartment = false;
+        $this->updateApartment = false;
         $this->dispatchBrowserEvent('close-modal');
 
     }
@@ -179,8 +192,8 @@ class Apartments extends Component
                 }
             }
         }
-        // dd($this->showImages);   
-        $this->dispatchBrowserEvent('open-modal1');
+        // dd($this->showImages);
+        $this->dispatchBrowserEvent('open-modal2');
         // dd($this->apartmentImages);
 
     }
@@ -211,9 +224,12 @@ class Apartments extends Component
             $this->setvalues($ApartmentUser);
 
             $this->updateApartment = true;
-
+            $this->addApartment = false;
         }
-        $this->dispatchBrowserEvent('open-modal');
+        // $this->resetFields(0);
+        $this->addApartment = false;
+        $this->updateApartment = true;
+        $this->dispatchBrowserEvent('open-modal1');
     }
 
     public function postUpdate($ApartmentId)
@@ -264,15 +280,13 @@ class Apartments extends Component
                     $ApartmentUser->gallary->image = $this->gallary;
                     if($ApartmentUser->save() && $ApartmentUser->gallary->save() && $ApartmentUser->info->save()){
                         $this->updateApartment = false;
+                        $this->addApartment = false;
+                        $this->resetFields(1);
+                        $this->resetFields(0);
+                        $this->dispatchBrowserEvent('close-modal1');
                     }
                 }
-
-
         }
-
-
-        $this->resetFields(1);
-        $this->dispatchBrowserEvent('close-modal');
     }
 
     public function mount()
@@ -286,25 +300,6 @@ class Apartments extends Component
         return explode("/", $features);
     }
 
-    protected function validateCustom()
-    {
-        $rules = [
-            'update_link' => 'required|url',
-            'update_price' => 'required|numeric',
-            'update_location' => 'required',
-            'update_num_bedrooms' => 'required|integer',
-            'update_num_living_rooms' => 'required|integer',
-            'update_num_bathrooms' => 'required|integer',
-            'update_num_parking' => 'nullable',
-            'update_num_floors' => 'required|integer',
-            'update_area' => 'required|integer',
-            'update_description' => 'required',
-            'update_ratings' => 'nullable|numeric|min:1',
-            'update_features' => 'required',
-            'update_files.*' => 'required',
-        ];
-        $this->validate($rules);
-    }
 
     protected function setvalues($ApartmentUser)
     {
@@ -326,7 +321,7 @@ class Apartments extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.apartments', [
+        return view('livewire.dashboard.apartments.apartments', [
             "apartments" => $this->user->Apartment()->with('info')->simplePaginate(10)
         ]);
     }
