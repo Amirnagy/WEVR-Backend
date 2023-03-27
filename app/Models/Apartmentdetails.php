@@ -19,6 +19,9 @@ class Apartmentdetails extends Model
         'baths',
         'floors',
         'erea',
+        'price_after_discount',
+        'discount_end_date',
+        'discount'
 
     ];
 

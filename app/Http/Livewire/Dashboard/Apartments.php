@@ -116,7 +116,7 @@ class Apartments extends Component
 
     public function PostApartments()
     {
-        $Vaildator = $this->validate();
+        $this->validate();
         $this->features = $this->SplitFeatures($this->features);
         if ($this->user) {
             $Apartment = new Apartment();
@@ -227,8 +227,6 @@ class Apartments extends Component
             $this->addApartment = false;
         }
         // $this->resetFields(0);
-        $this->addApartment = false;
-        $this->updateApartment = true;
         $this->dispatchBrowserEvent('open-modal1');
     }
 

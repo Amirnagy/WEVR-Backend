@@ -33,7 +33,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::controller(ApartmentController::class)->group(function(){
 
         Route::get('showApartments','showApartments')->name('showApartments');
-        Route::post('addApartments','postApartments')->name('addApartments');
+
     });
 
     Route::controller(ApartmentDiscount::class)->group(function(){

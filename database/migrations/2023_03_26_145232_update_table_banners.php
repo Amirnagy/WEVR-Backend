@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->smallInteger('discount')->nullable();
+            $table->timestamp('discount_end_date')->nullable();
 
         });
     }

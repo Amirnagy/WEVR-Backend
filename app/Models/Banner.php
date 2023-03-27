@@ -13,7 +13,8 @@ class Banner extends Model
     protected $fillable=[
         'apartment_id',
         'image',
-        'discount'
+        'discount',
+        'discount_end_date'
     ];
 
 
