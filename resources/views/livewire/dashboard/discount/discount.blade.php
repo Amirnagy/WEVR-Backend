@@ -16,7 +16,7 @@
                 }, 1000); // Set the delay to one second (1000ms)
             </script>
             @endif
-            
+
             <table class="table">
                 <thead>
                     <tr>
@@ -32,20 +32,23 @@
 
                     </tr>
                 </thead>
+                {{-- @dd($apartments) --}}
                 <tbody>
                     @foreach ($apartments as $apart)
-                        <th>{{ $loop->index + 1 }}</th>
-                        <th>{{ $apart->location }}</th>
-                        <th>{{ $apart->status }}</th>
-                        <th title="{{ $apart->descrption }}">hover me</th>
-                        <th>{{ $apart->info->yearprice }}</th>
-                        <th>{{ $apart->info->discount }}</th>
-                        <th>{{ $apart->info->price_after_discount }}</th>
-                        <th>{{ $apart->info->discount_end_date }}</th>
-                        <th>
+                    <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $apart->location }}</td>
+                        <td>{{ $apart->status }}</td>
+                        <td title="{{ $apart->descrption }}">hover me</td>
+                        <td>{{ $apart->info->yearprice }}</td>
+                        <td>{{ $apart->info->discount }}</td>
+                        <td>{{ $apart->info->price_after_discount }}</td>
+                        <td>{{ $apart->info->discount_end_date }}</td>
+                        <td>
                             <button type="button" class="modalBtn"  wire:click="discount({{ $apart->id }})">
                                 Discount</button>
-                        </th>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

@@ -29,16 +29,19 @@ class Apartment extends Controller
         foreach($banners as $record => $banner)
         {
             $id = $banner->apartment_id;
-            $images = $banner->image;
+            $images = env('APP_URL') . '/' . $banner->image;
+            $price = $banner->Apartment->info->yearprice;
             $discount = $banner->discount;
             $priceAfterDiscount = $banner->price_after_discount;
+            $discount_end_date = $banner->discount_end_date;
 
-            $image = env('APP_URL').'/'. $images[0];
             $bannerData = [
                 'id' => $id,
-                'image' => $image,
+                'image' => $images,
                 'discount' => $discount,
-                'price_after_discount' => $priceAfterDiscount
+                'price_before_discount' => $price,
+                'price_after_discount' => $priceAfterDiscount,
+                'discount_end_date' =>  $discount_end_date,
             ];
 
             array_push($data, $bannerData);

@@ -128,6 +128,7 @@ class Apartments extends Component
                 'dimensions' => $this->area,
                 'descrption' => $this->description,
                 'features' => $this->features,
+                'rating' => $this->ratings,
             ]);
             $Apartment->save();
 
@@ -155,7 +156,7 @@ class Apartments extends Component
             foreach ($images as $file) {
                 $ImageName = rand(100000, 999999) . time() . $file->getClientOriginalName();
                 $path = $file->storeAs('gallaryaprtments', $ImageName, 'WEVR');
-                $this->gallary[] = env('APP_URL') . '/' . $path;
+                $this->gallary[] = $path;
             }
             $ApartmentGallary = new Gallary();
             $ApartmentGallary->apartment_id = $Apartment->id;
@@ -182,9 +183,9 @@ class Apartments extends Component
             if ($Apartment->id == $ApartmentId) {
 
                 $apartment = Gallary::where('apartment_id', $ApartmentId)->first();
-                // dd($apartment);
                 if ($apartment) {
                     $this->showImages = $apartment->image;
+
                     break;
                 } else {
                     return $this->showImages = [];
@@ -207,6 +208,8 @@ class Apartments extends Component
         // dd($apartment->gallary->image);
         // Storage::disk('gallaryaprtments')->delete();
         $apartment->delete();
+        $apartment->info->delete();
+        $apartment->gallary->delete();
         session()->flash('message', 'Apartment deleted successfully.');
         } else {
         session()->flash('message', 'You do not have permission to delete this apartment.');
@@ -257,7 +260,7 @@ class Apartments extends Component
                     {
                         $ImageName = rand(100000, 999999) . time() . $file->getClientOriginalName();
                         $path = $file->storeAs('gallaryaprtments', $ImageName, 'WEVR');
-                        $this->gallary[] = env('APP_URL') . '/' . $path;
+                        $this->gallary[] = $path;
                     }
                     $ApartmentUser = $Apartment->where('id',"$ApartmentId")->with('info')->with('gallary')->first();
                     $this->gallary = array_merge($ApartmentUser->gallary->image,$this->gallary);
