@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Auth\Register;
 use App\Http\Controllers\Api\Products\Products;
 use App\Http\Controllers\API\User\UpdateUserInfo;
 use App\Http\Controllers\API\Apartments\Apartment;
+use App\Http\Controllers\API\Search\searchController;
 use App\Http\Controllers\Apartments\ApartmaentController;
 
 /*
@@ -34,15 +35,16 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     // -------------------------------------------------------
     Route::get('banners',[Apartment::class,'Banner']);
     Route::get('apartment',[Apartment::class,'Apartment']);
-
+    Route::post('save/apartment/{id}',[Apartment::class,'SaveApartment']);
+    Route::get('saved/apartment',[Apartment::class,'SavedApartment']);
+    // -------------------------------------------------------
+    Route::get('search',[searchController::class,'search']);
     // -------------------------------------------------------
     Route::delete('logout', [Logout::class,'logout']);
 
 
 });
-
 // -----------------------------------------------------
-
 
 Route::post('register',[Register::class,'register']);
 Route::post('login',[Login::class,'login']);
@@ -50,15 +52,6 @@ Route::post('resetViaEmail',[reset::class,'sendingEmail']);
 Route::post('checkOTP',[reset::class,'checkOPT']);
 Route::post('newPassword',[reset::class,'newPassword']);
 
-
-
-
-
-
-// -------------------------------------------------------
-Route::get('/',function (){
-    return view('welldone');
-});
 
 // -------------------------------------------------------
 

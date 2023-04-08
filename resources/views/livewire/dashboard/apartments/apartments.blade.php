@@ -43,6 +43,7 @@
                     <tr>
                         <th>id</th>
                         <th>Price</th>
+                        <th>type</th>
                         <th>Location</th>
                         <th>Status</th>
                         <th>dimensions</th>
@@ -63,6 +64,7 @@
                         <tr>
                             <th>{{ $loop->index + 1 }}</th>
                             <th>{{ $apartment->info->yearprice }}</th>
+                            <th>{{ $apartment->type}}</th>
                             <th>{{ $apartment->location }}</th>
                             <th>{{ $apartment->status }}</th>
                             <th>{{ $apartment->dimensions }}</th>

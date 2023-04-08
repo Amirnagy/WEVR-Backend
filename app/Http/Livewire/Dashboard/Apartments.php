@@ -15,6 +15,7 @@ class Apartments extends Component
     use WithFileUploads,WithPagination;
     public $user;
     public $IDapartment;
+    public $type;
     public $link;
     public $location;
     public $area;
@@ -32,6 +33,7 @@ class Apartments extends Component
 
 
     public $update_link;
+    public $update_type;
     public $update_location;
     public $update_area;
     public $update_description;
@@ -54,6 +56,7 @@ class Apartments extends Component
 
     protected $rules = [
         'link' => 'required|url',
+        'type' => 'required',
         'price' => 'required|numeric',
         'location' => 'required',
         'num_bedrooms' => 'required|integer',
@@ -72,6 +75,7 @@ class Apartments extends Component
         if($action == 0)
         {
             $this->link = '';
+            $this->type = '';
             $this->price = '';
             $this->location = '';
             $this->num_bedrooms = '';
@@ -87,6 +91,7 @@ class Apartments extends Component
             $this->files=[];
         }else{
             $this->update_link = '';
+            $this->update_type = '';
             $this->update_price = '';
             $this->update_location = '';
             $this->update_num_bedrooms = '';
@@ -123,6 +128,7 @@ class Apartments extends Component
             $Apartment->fill([
                 'user_id' => $this->user->id,
                 'vrlink' => $this->link,
+                'type' => $this->type,
                 'location' => $this->location,
                 'status' => 'available',
                 'dimensions' => $this->area,
@@ -237,6 +243,7 @@ class Apartments extends Component
     {
         $this->validate([
             'update_link' => 'required|url',
+            'update_type' => 'required',
             'update_price' => 'required|numeric',
             'update_location' => 'required',
             'update_num_bedrooms' => 'required|integer',
@@ -265,6 +272,7 @@ class Apartments extends Component
                     $ApartmentUser = $Apartment->where('id',"$ApartmentId")->with('info')->with('gallary')->first();
                     $this->gallary = array_merge($ApartmentUser->gallary->image,$this->gallary);
                     $ApartmentUser->vrlink  = $this->update_link;
+                    $ApartmentUser->type = $this->update_type;
                     $ApartmentUser->location = $this->update_location ;
                     $ApartmentUser->descrption = $this->update_description;
                     $ApartmentUser->features = $this->update_features;
