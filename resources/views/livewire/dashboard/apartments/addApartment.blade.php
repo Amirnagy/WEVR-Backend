@@ -11,11 +11,27 @@
             </div>
             <form method="POST" enctype="multipart/form-data" wire:submit.prevent='PostApartments'>
                 @csrf
-                @error('link')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-
                 <div class="modal-body">
+
+                    @error('type')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+
+                    <label for="type">Type:</label>
+                    <div class="form-group">
+                        <select class="form-control" @error('type') is-invalid @enderror
+                            id="type" name="type" wire:model.defer="type">
+                            <option value="">Select Type</option>
+                            <option value="1">Apartment</option>
+                            <option value="2">Duplex</option>
+                            <option value="3">Villa</option>
+                        </select>
+                    </div>
+
+                    @error('link')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+
                     <label for="link">Link:</label>
                     <div class="form-group">
                         <input class="form-control" type="text" id="link" @error('link') is-invalid @enderror

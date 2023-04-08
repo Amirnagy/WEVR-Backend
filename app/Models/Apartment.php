@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Banner;
 use App\Models\Gallary;
+use App\Models\SavedApartment;
 use App\Models\Apartmentdetails;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +17,7 @@ class Apartment extends Model
     protected $fillable=[
         'user_id',
         'vrlink',
+        'type',
         'location',
         'status',
         'dimensions',
@@ -46,6 +48,11 @@ class Apartment extends Model
     public function Banner()
     {
         return $this->hasOne(Banner::class);
+    }
+
+    public function SavedUser()
+    {
+        return $this->belongsTo(SavedApartment::class,'apartment_id');
     }
 
 
