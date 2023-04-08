@@ -34,6 +34,6 @@ class searchController extends Controller
 
         // return $this->apiResponse('','','');
 
-        dd([$type,$min_price,$max_price ,$bedroom ,$baths ,$Livingroom ]);
+        dd([$min_price,$max_price ,$bedroom ,$baths ,$Livingroom ]);
     }
 }
