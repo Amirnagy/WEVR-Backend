@@ -72,4 +72,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(SavedApartment::class,'user_id');
     }
+
+    public function Apartments()
+    {
+        return $this->belongsToMany(Apartment::class,'apartment_user_reservation')->withPivot('owner_apartment', 'reservation_date');
+    }
 }
+

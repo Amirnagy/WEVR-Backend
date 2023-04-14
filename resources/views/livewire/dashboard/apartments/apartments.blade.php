@@ -32,6 +32,12 @@
                 }, 1000); // Set the delay to one second (1000ms)
             </script>
         @endif
+        <div class="desc-box">
+            <div class="desc-contant">
+                <div class="close" onclick="hideDesc()"><i class="bi bi-x-lg"></i></div>
+                <p>qekljfwdl</p>
+            </div>
+        </div>
         <h2>Apartments List</h2>
         {{-- button add  --}}
         <button type="button" class="btn btn-primary" style="float: right;" wire:click="addApartment">
@@ -68,9 +74,21 @@
                             <th>{{ $apartment->location }}</th>
                             <th>{{ $apartment->status }}</th>
                             <th>{{ $apartment->dimensions }}</th>
-                            <th title="{{ $apartment->descrption }}">hoverme</th>
-                            <th title="@foreach ($apartment->features as $feature){{ $feature }} @endforeach">
-                                features
+
+                            <th><input class="modalBtn desc-button" onclick="showDesc()" type="button" value="view">
+                                
+                                </div>
+                            </th>
+                            <th><input class="modalBtn desc-button" type="button" value="view" >    
+                                {{-- <div class="feature-box">
+                                    <div class="feature-contant">
+                                        <ul>
+                                            @foreach ($apartment->features as $feature) 
+                                                <li>{{ $feature }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div> --}}
                             </th>
                             <th>{{ $apartment->info->livingroom }}</th>
                             <th>{{ $apartment->info->bedroom }}</th>
@@ -93,6 +111,7 @@
 
                 </tbody>
             </table>
+
             {{ $apartments->links('') }}
 
 
@@ -124,6 +143,15 @@
                     $("#showImage").modal("show");
                 });
             </script>
-
+            <script>
+                const showDesc = () =>{
+                document.querySelector('.desc-box').classList.add('show-desc')
+                document.body.style.overFlowY = "hidden"
+                }
+                const hideDesc = () =>{
+                document.querySelector('.desc-box').classList.remove('show-desc')
+                document.body.style.overFlowY = "auto"
+                }
+            </script>
         @endpush
     </div>

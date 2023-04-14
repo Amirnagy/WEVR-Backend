@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\API\Apartments;
 
-use App\Http\Controllers\Controller;
-use App\Models\Apartment as ModelsApartment;
+use Carbon\Carbon;
 use App\Models\Banner;
-use App\Models\SavedApartment;
 use Illuminate\Http\Request;
+use App\Models\SavedApartment;
+use App\Mail\Apartment_reserved;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Mail\invitation_card;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
+
+use App\Models\Apartment as ModelsApartment;
 
 class Apartment extends Controller
 {
@@ -31,7 +38,7 @@ class Apartment extends Controller
         foreach($banners as $record => $banner)
         {
             $id = $banner->apartment_id;
-            $images = env('APP_URL') . '/' .'public'.'/'. $banner->image;
+            $images = env('APP_URL').'public'.'/'. $banner->image;
             $price = $banner->Apartment->info->yearprice;
             $discount = $banner->discount;
             $priceAfterDiscount = $banner->price_after_discount;
@@ -112,6 +119,71 @@ class Apartment extends Controller
         }
         else{
             return $this->apiResponse(1,'NO Saved Apartment',0);
+        }
+    }
+
+    public function reservation(Request $request,$id)
+    {
+        $user = $request->user();
+
+        $vaildator = Validator::make($request->all(),[
+            'reserve_date' => 'required|date_format:Y-m-d H:i:s|after_or_equal:tomorrow'
+        ]);
+
+        if($vaildator->fails())
+        {
+            return $this->apiResponse(0,'vaildate error' , $vaildator->errors());
+        }
+
+        $reserve_date_start = $request->reserve_date;
+        $reserve_date_end = Carbon::parse($reserve_date_start)->addDay();
+
+        $apartment = ModelsApartment::find($id);
+
+        if($apartment)
+        {
+            $owner = $apartment->user->only(['id','name', 'email']);
+
+
+            if($user->id == $apartment->user_id)
+            {
+                return $this->apiResponse(0, "Can't reserved your apartment", null);
+            }
+
+            try {
+                $reservation = $apartment->users()->attach($user, ['owner_apartment_id' => $owner['id'], 'reservation_date' => $reserve_date_start]);
+            }catch (QueryException $e) {
+                return $this->apiResponse(0, 'Error Apartment already reserved', null);
+            }
+
+
+
+                // reserve apartment ... and send email to owner of apartment
+                Mail::to($owner['email'])->send(new Apartment_reserved($apartment->id,
+                $owner['name'],
+                $reserve_date_start,
+                $reserve_date_end,
+                $user->name,
+                env('APP_NAME')));
+                // register all mails that sended to owner
+
+
+                Mail::to($user->email)->send(new invitation_card(
+                    $user->name,
+                    $owner['name'],
+                    $apartment->id,
+                    $apartment->location,
+                    $apartment->dimensions,
+                    $apartment->descrption,
+                    $reserve_date_start,
+                    $reserve_date_end,
+                    'WEVR'));
+                // register all mails that sended to user
+
+            return $this->apiResponse(1,'reservation successully please check your email to view card invitations',null);
+
+        }else{
+            return $this->apiResponse(0,'apartment not found',null);
         }
     }
 }

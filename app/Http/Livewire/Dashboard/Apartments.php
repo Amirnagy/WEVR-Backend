@@ -129,7 +129,7 @@ class Apartments extends Component
                 'user_id' => $this->user->id,
                 'vrlink' => $this->link,
                 'type' => $this->type,
-                'location' => $this->location,
+                'location' => strtolower($this->location),
                 'status' => 'available',
                 'dimensions' => $this->area,
                 'descrption' => $this->description,
@@ -273,7 +273,7 @@ class Apartments extends Component
                     $this->gallary = array_merge($ApartmentUser->gallary->image,$this->gallary);
                     $ApartmentUser->vrlink  = $this->update_link;
                     $ApartmentUser->type = $this->update_type;
-                    $ApartmentUser->location = $this->update_location ;
+                    $ApartmentUser->location = strtolower($this->update_location) ;
                     $ApartmentUser->descrption = $this->update_description;
                     $ApartmentUser->features = $this->update_features;
                     $ApartmentUser->rating = $this->update_ratings;

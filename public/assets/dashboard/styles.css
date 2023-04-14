@@ -175,3 +175,60 @@ body{
     color: #009d63;
 
 }
+
+
+.desc-box{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.815);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition:.4s ;
+    transform: scale(0);
+}
+.show-desc{
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.desc-box .desc-contant{
+    padding: 30px;
+    border-radius: 5px;
+    background-color: white;
+    position: relative;
+    width: 60%;
+    /* overflow: hidden; */
+    
+}
+.desc-box .desc-contant .close {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    padding: 10px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+
+}
+
+
+.desc-box .desc-contant .close i{
+    font-size: 20px;
+    color: #009d63;
+    display: flex;
+    transition: .4s;
+
+}
+
+
+.desc-box .desc-contant .close:hover i{
+    transform: rotate(90deg);
+}
