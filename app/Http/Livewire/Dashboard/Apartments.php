@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use App\Models\Apartmentdetails;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Ramsey\Uuid\FeatureSet;
 
 class Apartments extends Component
 {
@@ -54,14 +55,17 @@ class Apartments extends Component
     public $showImages;
     public $gallary=[];
 
+    public $currentDesc;
+    public $Currentfeatures;
+
     protected $rules = [
         'link' => 'required|url',
         'type' => 'required',
-        'price' => 'required|numeric',
-        'location' => 'required',
-        'num_bedrooms' => 'required|integer',
-        'num_living_rooms' => 'required|integer',
-        'num_bathrooms' => 'required|integer',
+        'price' => 'required|numeric|min:1000',
+        'location' => 'required|string',
+        'num_bedrooms' => 'required|integer|min:1',
+        'num_living_rooms' => 'required|integer|min:1',
+        'num_bathrooms' => 'required|integer|min:1',
         'num_parking' => 'nullable',
         'num_floors' => 'required|integer',
         'area' => 'required|integer',
@@ -203,6 +207,23 @@ class Apartments extends Component
         $this->dispatchBrowserEvent('open-modal2');
         // dd($this->apartmentImages);
 
+    }
+
+    public function showdesc($id)
+    {
+
+        $ApartmentsUser = Apartment::where('id','=',"$id")->first();
+
+        $this->currentDesc = $ApartmentsUser->descrption;
+        $this->dispatchBrowserEvent('open-modal3');
+    }
+
+    public function showfeature($id)
+    {
+        $ApartmentsUser = Apartment::where('id','=',"$id")->first();
+        $this->Currentfeatures = $ApartmentsUser->features;
+        
+        $this->dispatchBrowserEvent('open-modal4');
     }
 
     public function deleteApartment($ApartmentId)

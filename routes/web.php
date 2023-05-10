@@ -18,7 +18,7 @@ use App\Http\Controllers\Dashbord\ApartmentDiscount;
 */
 
 
-Route::get('/',function (){
+Route::get('/   ',function (){
     return view('wevr');
 });
 

@@ -1,7 +1,5 @@
 <div>
-
     <!-- Modal -->
-
     @include('livewire.dashboard.apartments.modalShowImage')
     <!-- Modal add -->
     @include('livewire.dashboard.apartments.addApartment')
@@ -32,12 +30,10 @@
                 }, 1000); // Set the delay to one second (1000ms)
             </script>
         @endif
-        <div class="desc-box">
-            <div class="desc-contant">
-                <div class="close" onclick="hideDesc()"><i class="bi bi-x-lg"></i></div>
-                <p>qekljfwdl</p>
-            </div>
-        </div>
+
+        @include('livewire.dashboard.apartments.description')
+        @include('livewire.dashboard.apartments.features')
+
         <h2>Apartments List</h2>
         {{-- button add  --}}
         <button type="button" class="btn btn-primary" style="float: right;" wire:click="addApartment">
@@ -75,20 +71,11 @@
                             <th>{{ $apartment->status }}</th>
                             <th>{{ $apartment->dimensions }}</th>
 
-                            <th><input class="modalBtn desc-button" onclick="showDesc()" type="button" value="view">
-                                
+                            <th><input class="modalBtn desc-button" wire:click="showdesc({{$apartment->id}})" type="button" value="view">
+
                                 </div>
                             </th>
-                            <th><input class="modalBtn desc-button" type="button" value="view" >    
-                                {{-- <div class="feature-box">
-                                    <div class="feature-contant">
-                                        <ul>
-                                            @foreach ($apartment->features as $feature) 
-                                                <li>{{ $feature }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div> --}}
+                            <th><input class="modalBtn desc-button" wire:click="showfeature({{$apartment->id}})" type="button" value="features" >
                             </th>
                             <th>{{ $apartment->info->livingroom }}</th>
                             <th>{{ $apartment->info->bedroom }}</th>
@@ -144,14 +131,14 @@
                 });
             </script>
             <script>
-                const showDesc = () =>{
-                document.querySelector('.desc-box').classList.add('show-desc')
-                document.body.style.overFlowY = "hidden"
-                }
-                const hideDesc = () =>{
-                document.querySelector('.desc-box').classList.remove('show-desc')
-                document.body.style.overFlowY = "auto"
-                }
+                window.addEventListener('open-modal3', event => {
+                    $("#show_desc").modal("show");
+                });
+            </script>
+            <script>
+                window.addEventListener('open-modal4', event => {
+                    $("#show_feature").modal("show");
+                });
             </script>
         @endpush
     </div>

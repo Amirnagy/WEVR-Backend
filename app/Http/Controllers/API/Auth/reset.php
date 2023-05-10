@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\sendmailJop;
 use App\Mail\resetMail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -41,7 +43,9 @@ class reset extends Controller
 
             if($updated_code)
             {
-                Mail::to($user->email)->send(new resetMail($pin_code));
+
+                $jop = (new sendmailJop($pin_code,$user->email))->delay(Carbon::now()->addSeconds(5));
+                dispatch($jop);
                 // email should send again with confirmed code
                 return $this->apiResponse(1,
                 'please check your email',

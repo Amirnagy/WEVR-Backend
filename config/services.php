@@ -47,14 +47,5 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('http://localhost/login/google/callback')
     ],
-    // 'twitter' => [
-    //     'client_id' => env('TWITTER_CLIENT_ID'),
-    //     'client_secret' => env('TWITTER_CLIENT_SECRET'),
-    //     'redirect' => env('TWITTER_REDIRECT_URI')
-    // ],
-    // 'instagram' => [
-    //     'client_id' => env('INSTAGRAM_CLIENT_ID'),
-    //     'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
-    //     'redirect' => env('http://localhost/login/instagram/callback')
-    // ],
+
 ];
