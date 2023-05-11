@@ -63,7 +63,7 @@ class Apartment extends Controller
         // get all data of Apartment of all user 10 and with every request i
         // will get the next 10
 
-        $Apartment = ModelsApartment::with('info')->with('gallary')->paginate(1);
+        $Apartment = ModelsApartment::with('info')->with('gallary')->get();
         return $this->apiResponse(1,'arpartment loaded susseccfully',$Apartment);
     }
     public function SaveApartment(Request $request ,$id)

@@ -60,4 +60,5 @@ class Apartment extends Model
         return $this->belongsToMany(User::class,'apartment_user_reservation')->withPivot('owner_apartment', 'reservation_date');
     }
 
+
 }

@@ -39,13 +39,13 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::get('saved/apartment',[Apartment::class,'SavedApartment']);
     Route::post('reservation/apartment/{id}',[Apartment::class,'reservation']);
     // -------------------------------------------------------
-    Route::get('searchfilter',[searchController::class,'search']);
-    Route::get('search',[searchController::class,'searchBystatment']);
     // -------------------------------------------------------
     Route::delete('logout', [Logout::class,'logout']);
 });
 // -----------------------------------------------------
 
+Route::get('search',[searchController::class,'searchBystatment']);
+Route::get('searchfilter',[searchController::class,'search']);
 Route::post('register',[Register::class,'register']);
 Route::post('login',[Login::class,'login']);
 Route::post('resetViaEmail',[reset::class,'sendingEmail']);

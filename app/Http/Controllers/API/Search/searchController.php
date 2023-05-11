@@ -25,6 +25,17 @@ class searchController extends Controller
         );
     }
 
+    private function handelIamge($apartments)
+    {
+        $apartments = $apartments->map(function ($apartment) {
+            $images = json_decode($apartment->image);
+            $apartment->image = collect($images)->map(function ($image) {
+                return env('APP_URL') .'/'. $image;
+            });
+            return $apartment;
+        });
+        return $apartments;
+    }
     private function customizeRequest($request)
     {
         $this->min_price = $request->min_price ?? 100;
@@ -41,12 +52,12 @@ class searchController extends Controller
 
         $this->Livingroom = $request->Livingroom ?? 100;
         $this->operator3 = !$request->Livingroom ? '<' : '=';
-        
+
     }
     public function search(Request $request)
     {
         $this->customizeRequest($request);
-        
+
 
         $apartments = Apartment::query()
         ->join('apartmentdetails', 'apartments.id', '=', 'apartmentdetails.apartment_id')
@@ -72,8 +83,13 @@ class searchController extends Controller
                 function ($query) {
                     return $query->where('livingroom',$this->operator3, $this->Livingroom);})
 
-        ->paginate(10);
-        
+        ->join('gallaries', 'apartments.id', '=', 'gallaries.apartment_id')
+        ->get();
+
+        $this->handelIamge($apartments);
+
+
+
         if(count($apartments)>=1)
         {
             return $this->apiResponse(1,'sucess search',$apartments);
@@ -92,7 +108,12 @@ class searchController extends Controller
                     $query->orWhere('location', 'like', '%' . $token . '%');
                 }
             })
+            ->join('apartmentdetails', 'apartments.id', '=', 'apartmentdetails.apartment_id')
+            ->join('gallaries', 'apartments.id', '=', 'gallaries.apartment_id')
             ->get();
+
+            $this->handelIamge($results);
+
         if(count($results)>=1)
         {
             return $this->apiResponse(1,'successfully search',$results);
