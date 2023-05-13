@@ -9,12 +9,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            @error('price')
+            {{ $message }}
+        @enderror 
             <form method="POST" enctype="multipart/form-data" wire:submit.prevent='PostApartments'>
                 @csrf
                 <div class="modal-body">
 
                     @error('type')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="type">Type:</label>
@@ -29,7 +32,7 @@
                     </div>
 
                     @error('link')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="link">Link:</label>
@@ -39,18 +42,17 @@
                     </div>
 
 
-                    @error('price')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+
 
                     <label for="price">Price per month:</label>
+
                     <div class="form-group">
                         <input class="form-control" type="number" id="price" required name="price"
                             @error('price') is-invalid @enderror wire:model.defer="price">
                     </div>
 
                     @error('location')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="location">Location:</label>
@@ -60,7 +62,7 @@
                     </div>
 
                     @error('num_bedrooms')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="num_bedrooms">Number of Bedrooms:</label>
@@ -70,7 +72,7 @@
                     </div>
 
                     @error('num_living_rooms')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
 
@@ -82,7 +84,7 @@
 
 
                     @error('num_bathrooms')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="num_bathrooms">Number of Bathrooms:</label>
@@ -94,7 +96,7 @@
 
 
                     @error('num_parking')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="num_parking">Number of Parking:</label>
@@ -104,7 +106,7 @@
                     </div>
 
                     @error('num_floors')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="num_floors">Number of Floors:</label>
@@ -115,7 +117,7 @@
 
 
                     @error('area')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="area">Area:</label>
@@ -127,7 +129,7 @@
 
 
                     @error('description')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="description">Description:</label>
@@ -138,7 +140,7 @@
 
 
                     @error('ratings')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="ratings">Ratings:</label>
@@ -149,7 +151,7 @@
 
 
                     @error('features')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <label for="features-container">Features : </label>
@@ -166,7 +168,7 @@
                     <br>
 
                     @error('files')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        {{ $message }}
                     @enderror
 
                     <div id="fileUploads">

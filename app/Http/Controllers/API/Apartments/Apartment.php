@@ -29,7 +29,17 @@ class Apartment extends Controller
             $response
         );
     }
-
+    private function handelIamge($apartments)
+    {
+        $apartments = $apartments->map(function ($apartment) {
+            $images = json_decode($apartment->image);
+            $apartment->image = collect($images)->map(function ($image) {
+                return env('APP_URL') .'/'. $image;
+            });
+            return $apartment;
+        });
+        return $apartments;
+    }
 
     public function Banner()
     {
@@ -63,7 +73,9 @@ class Apartment extends Controller
         // get all data of Apartment of all user 10 and with every request i
         // will get the next 10
 
-        $Apartment = ModelsApartment::with('info')->with('gallary')->get();
+        $Apartment = ModelsApartment::with('info')->join('gallaries', 'apartments.id', '=', 'gallaries.apartment_id')
+                ->get();
+        $Apartment = $this->handelIamge($Apartment);
         return $this->apiResponse(1,'arpartment loaded susseccfully',$Apartment);
     }
     public function SaveApartment(Request $request ,$id)

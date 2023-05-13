@@ -1,36 +1,36 @@
 <div>
     <!-- Modal -->
-    @include('livewire.dashboard.apartments.modalShowImage')
     <!-- Modal add -->
     @include('livewire.dashboard.apartments.addApartment')
+    @include('livewire.dashboard.apartments.updateApartment')
 
     <!-- Modal update -->
-    @include('livewire.dashboard.apartments.updateApartment')
 
     {{-- ==================================== --}}
 
     <div class="container">
         @if (session()->has('success'))
-            <div id="flash-message" class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            <script>
-                setTimeout(function() {
-                    $('#flash-message').fadeOut('fast');
-                }, 1000); // Set the delay to one second (1000ms)
+        <div id="flash-message" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#flash-message').fadeOut('fast');
+            }, 1000); // Set the delay to one second (1000ms)
             </script>
         @endif
         @if (session()->has('message'))
-            <div id="flash-message" class="alert alert-success">
-                {{ session('message') }}
-            </div>
-            <script>
-                setTimeout(function() {
-                    $('#flash-message').fadeOut('fast');
-                }, 1000); // Set the delay to one second (1000ms)
+        <div id="flash-message" class="alert alert-success">
+            {{ session('message') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#flash-message').fadeOut('fast');
+            }, 1000); // Set the delay to one second (1000ms)
             </script>
         @endif
 
+        @include('livewire.dashboard.apartments.modalShowImage')
         @include('livewire.dashboard.apartments.description')
         @include('livewire.dashboard.apartments.features')
 

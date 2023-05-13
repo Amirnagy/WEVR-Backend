@@ -61,16 +61,16 @@ class Apartments extends Component
     protected $rules = [
         'link' => 'required|url',
         'type' => 'required',
-        'price' => 'required|numeric|min:1000',
+        'price' => 'required|numeric',
         'location' => 'required|string',
-        'num_bedrooms' => 'required|integer|min:1',
-        'num_living_rooms' => 'required|integer|min:1',
-        'num_bathrooms' => 'required|integer|min:1',
+        'num_bedrooms' => 'required|integer',
+        'num_living_rooms' => 'required|integer',
+        'num_bathrooms' => 'required|integer',
         'num_parking' => 'nullable',
         'num_floors' => 'required|integer',
         'area' => 'required|integer',
         'description' => 'required',
-        'ratings' => 'nullable|numeric|min:1',
+        'ratings' => 'nullable|numeric',
         'features' => 'required',
         'files.*' => 'required',
     ];
@@ -126,6 +126,7 @@ class Apartments extends Component
     public function PostApartments()
     {
         $this->validate();
+
         $this->features = $this->SplitFeatures($this->features);
         if ($this->user) {
             $Apartment = new Apartment();
@@ -222,7 +223,7 @@ class Apartments extends Component
     {
         $ApartmentsUser = Apartment::where('id','=',"$id")->first();
         $this->Currentfeatures = $ApartmentsUser->features;
-        
+
         $this->dispatchBrowserEvent('open-modal4');
     }
 

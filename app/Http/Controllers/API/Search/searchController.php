@@ -12,7 +12,7 @@ class searchController extends Controller
 
     protected $type,$min_price,$max_price,$Livingroom,$baths,$bedroom,
     $operator,$operator1,$operator2,$operator3;
-
+    
     private function apiResponse($status,$massage,$data)
     {
         $response = [
