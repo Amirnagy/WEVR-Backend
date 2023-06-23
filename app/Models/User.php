@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Apartment;
+use App\Models\FinalAuction;
 use App\Models\SavedApartment;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\TransactionAuction;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,6 +78,17 @@ class User extends Authenticatable
     public function Apartments()
     {
         return $this->belongsToMany(Apartment::class,'apartment_user_reservation')->withPivot('owner_apartment', 'reservation_date');
+    }
+
+
+    public function auction()
+    {
+        return $this->hasOne(FinalAuction::class);
+    }
+
+    public function transactionAuction()
+    {
+        return $this->hasMany(TransactionAuction::class,'user_id');
     }
 }
 

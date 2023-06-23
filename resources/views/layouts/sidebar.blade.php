@@ -13,7 +13,7 @@
                 class="fas fa-mail-bulk me-3" style="color: rgb(248, 178, 216);"></i>Mails</a>
         <a href="{{Route('discount')}}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                 class="fas fa-trophy me-3" style="color: rgb(248, 193, 171);"></i>Discount</a>
-        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+        <a href="{{route('Auction')}}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                 class="fas fa-gavel me-3" style="color: rgb(220, 213, 255);"></i>Auctions</a>
         <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                 class="fas fa-handshake me-3" style="color: rgb(250, 225, 192);"></i>Meetings</a>

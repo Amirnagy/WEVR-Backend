@@ -111,28 +111,28 @@ class Apartment extends Controller
     }
 
     public function SavedApartment(Request $request)
-    {
-        $user = $user = $request->user();
-        $apartment = $user->SavedApartmant;
-        if($apartment)
-        {
-            // loop on apartment of user and put it in
-            // data variable and send it with request of api
-            $data = [];
-            foreach($apartment as $Apart)
-            {
-                $data[] = $Apart->apartment_id;
-            }
-            $SavedApartment = ModelsApartment::whereIn('id', $data)
-                ->with('info')
-                ->with('gallary')
-                ->get();
-            return $this->apiResponse(1,'Apartment loaded successfully',$SavedApartment);
-        }
-        else{
-            return $this->apiResponse(1,'NO Saved Apartment',0);
-        }
+{
+    $user = $request->user();
+    $savedApartments = $user->SavedApartmant;
+
+    if ($savedApartments) {
+        // Get the IDs of the saved apartments
+        $apartmentIds = $savedApartments->pluck('apartment_id')->toArray();
+
+        // Retrieve the apartments with their info and images
+        $savedApartments = ModelsApartment::whereIn('apartments.id', $apartmentIds)
+            ->with('info')
+            ->join('gallaries', 'apartments.id', '=', 'gallaries.apartment_id')
+            ->get();
+
+        // Format the image URLs
+        $savedApartments = $this->handelIamge($savedApartments);
+
+        return $this->apiResponse(1, 'Apartments loaded successfully', $savedApartments);
+    } else {
+        return $this->apiResponse(1, 'No saved apartments', []);
     }
+}
 
     public function reservation(Request $request,$id)
     {

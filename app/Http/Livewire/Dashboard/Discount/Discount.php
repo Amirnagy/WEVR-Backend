@@ -87,7 +87,6 @@ class Discount extends Component
 
     public function render()
     {
-
         return view('livewire.dashboard.discount.discount', [
             'apartments' => $this->user->Apartment()->with('info')->paginate(10),
         ]);

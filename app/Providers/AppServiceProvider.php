@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\Apartment;
+use App\Wrapper\ApiResponse;
 use Laravel\Sanctum\Sanctum;
 use App\Models\PersonalAccessToken;
+use Illuminate\Support\ServiceProvider;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ApiResponse::class, function ($app) {
+            return new ApiResponse(new Apartment());
+        });
     }
 
     /**

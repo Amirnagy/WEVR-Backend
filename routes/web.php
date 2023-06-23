@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Dashbord\ApartmentController;
 use App\Http\Controllers\Dashbord\ApartmentDiscount;
+use App\Http\Controllers\Dashbord\AuctionsController;
+use App\Http\Controllers\Dashbord\ApartmentController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +34,13 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::controller(ApartmentController::class)->group(function(){
 
         Route::get('showApartments','showApartments')->name('showApartments');
-
     });
 
     Route::controller(ApartmentDiscount::class)->group(function(){
         Route::get('discount','makeDiscount')->name('discount');
 
+        Route::get('auction',[AuctionsController::class,'makeAuction'])
+        ->name('Auction');
 });
 
 

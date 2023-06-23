@@ -11,7 +11,7 @@
             </div>
             @error('price')
             {{ $message }}
-        @enderror 
+            @enderror
             <form method="POST" enctype="multipart/form-data" wire:submit.prevent='PostApartments'>
                 @csrf
                 <div class="modal-body">

@@ -192,6 +192,7 @@ body{
     opacity: 0;
     transition:.4s ;
     transform: scale(0);
+    
 }
 .show-desc{
     visibility: visible;
@@ -206,7 +207,7 @@ body{
     position: relative;
     width: 60%;
     /* overflow: hidden; */
-    
+
 }
 .desc-box .desc-contant .close {
     position: absolute;
