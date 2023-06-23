@@ -11,6 +11,7 @@ use App\Http\Controllers\API\User\UpdateUserInfo;
 use App\Http\Controllers\API\Apartments\Apartment;
 use App\Http\Controllers\API\Search\searchController;
 use App\Http\Controllers\Apartments\ApartmaentController;
+use App\Http\Controllers\API\Auction\AuctionController;
 use App\Http\Controllers\API\Auction\ListAuctionsController;
 use App\Http\Controllers\Dashbord\AuctionsController;
 
@@ -42,8 +43,8 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     // -------------------------------------------------------
     Route::get('list/auction/apartments',[ListAuctionsController::class,'index']);
     Route::get('list/auction/apartment/details',[ListAuctionsController::class,'apartment']);
-    Route::get('list/auction/join',[ListAuctionsController::class,'index']);
-    Route::get('list/auction/add',[ListAuctionsController::class,'index']);
+    Route::post('list/auction/join',[ListAuctionsController::class,'joinAuction']);
+    Route::post('list/auction/add',[AuctionController::class,'addPrice']);
     // Route::get('list/auction/my-bids',[ListAuctionsController::class,'my_bids' ]);
     // -------------------------------------------------------
     Route::delete('logout', [Logout::class,'logout']);

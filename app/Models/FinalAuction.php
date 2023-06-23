@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Apartment;
+use App\Models\Participant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,10 +26,14 @@ class FinalAuction extends Model
         return $this->belongsTo(Apartment::class,'apartment_id','id');
     }
 
-    // public function image()
-    // {
-    //     return $this->hasManyThrough('App\Models\Apartment','App\Models\Gallary','apartment_id','');
-    // }
+    public function participant()
+    {
+        return $this->hasMany(Participant::class,'auctions_id','id');
+    }
+    public function userCount()
+    {
+        return $this->participant()->count();
+    }
 
 
 }
